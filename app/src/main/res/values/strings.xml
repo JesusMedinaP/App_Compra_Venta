@@ -8,4 +8,10 @@
     <string name="TituloRL">Título</string>
     <string name="Ingresar_Email">Ingresar con email</string>
     <string name="Ingresar_Google">Ingresar con Google</string>
+    <string name="Txt_Login">Login de Usuario</string>
+    <string name="Et_Email">Email</string>
+    <string name="Et_Password">Password</string>
+    <string name="Btn_Ingresar">Ingresar</string>
+    <string name="Txt_No_Cuenta">¿No tienes una cuenta?</string>
+    <string name="Txt_Registrarme">REGISTRARME</string>
 </resources>
