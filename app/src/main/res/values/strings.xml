@@ -1,17 +1,25 @@
 <resources>
     <string name="app_name">App_Compra_y_Venta</string>
+    
     <string name="Item_Inicio">Inicio</string>
     <string name="Item_Chats">Chats</string>
     <string name="Item_Vender">Vender</string>
     <string name="Item_Mis_Anuncios">Mis Anuncios</string>
     <string name="Item_Cuenta">Cuenta</string>
+    
     <string name="TituloRL">Título</string>
+    
     <string name="Ingresar_Email">Ingresar con email</string>
     <string name="Ingresar_Google">Ingresar con Google</string>
+
     <string name="Txt_Login">Login de Usuario</string>
     <string name="Et_Email">Email</string>
     <string name="Et_Password">Password</string>
     <string name="Btn_Ingresar">Ingresar</string>
     <string name="Txt_No_Cuenta">¿No tienes una cuenta?</string>
     <string name="Txt_Registrarme">REGISTRARME</string>
+
+    <string name="Txt_Registro">Registro de Usuario</string>
+    <string name="Et_r_Password">Repetir Contraseña</string>
+    <string name="Btn_Registrar">Registrar</string>
 </resources>
