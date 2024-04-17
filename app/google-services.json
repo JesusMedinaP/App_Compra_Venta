@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "664042999726",
+    "project_id": "app-compra-y-venta-de42d",
+    "storage_bucket": "app-compra-y-venta-de42d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664042999726:android:54ecfbf3640f2d21ab823f",
+        "android_client_info": {
+          "package_name": "medina.jesus.app_compra_y_venta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMsD8WFFNY3JKCPPvrSZnK8Tw83SYQNT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
