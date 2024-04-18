@@ -113,7 +113,9 @@ class Registro_email : AppCompatActivity() {
         hashMap["uid"] = "${uidUsuario}"
         hashMap["fecha_nac"] = ""
 
-        val ref = FirebaseDatabase.getInstance().getReference("Usuarios")
+        //URL de la DATABASE en caso de tener que usarla
+        //https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app/
+        val ref = FirebaseDatabase.getInstance("https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app").getReference("Usuarios")
         ref.child(uidUsuario!!)
             .setValue(hashMap)
             .addOnSuccessListener {
