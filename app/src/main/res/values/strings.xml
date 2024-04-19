@@ -22,4 +22,6 @@
     <string name="Txt_Registro">Registro de Usuario</string>
     <string name="Et_r_Password">Repetir Contraseña</string>
     <string name="Btn_Registrar">Registrar</string>
+
+    <string name="Btn_Cerrar_Sesion">Cerrar Sesión</string>
 </resources>
