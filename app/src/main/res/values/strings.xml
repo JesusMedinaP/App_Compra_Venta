@@ -24,5 +24,23 @@
     <string name="Et_r_Password">Repetir Contraseña</string>
     <string name="Btn_Registrar">Registrar</string>
 
+    <!-- Perfil Usuario (Fragment Cuenta) -->
+    <string name="Txt_Perfil">Perfil de Usuario</string>
+    <string name="Txt_Informacion">Información: </string>
+    <string name="Txt_Nombres">Nombres: </string>
+    <string name="Tv_Nombres">Nombres completos:</string>
+    <string name="Txt_Email">Email: </string>
+    <string name="Tv_Email">email@dominio.com</string>
+    <string name="Txt_Nacimiento">Fecha de nacimiento: </string>
+    <string name="Tv_Nacimiento">dd/mm/aaaa</string>
+    <string name="Txt_Miembro">Miembro desde: </string>
+    <string name="Tv_Miembro">dd/mm/aaaa</string>
+    <string name="Txt_Telefono">Teléfono: </string>
+    <string name="Tv_Telefono">999999999</string>
+    <string name="Txt_Estado_Cuenta">Estado de cuenta: </string>
+    <string name="Tv_Estado_Cuenta">No Verificado</string>
+    
+    <string name="Txt_Opciones">Opciones</string>
+    <string name="Btn_Editar_Perfil">Editar Perfil</string>
     <string name="Btn_Cerrar_Sesion">Cerrar Sesión</string>
 </resources>
