@@ -115,7 +115,7 @@ class Registro_email : AppCompatActivity() {
 
         //URL de la DATABASE en caso de tener que usarla
         //https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app/
-        val ref = FirebaseDatabase.getInstance("https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app").getReference("Usuarios")
+        val ref = FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
         ref.child(uidUsuario!!)
             .setValue(hashMap)
             .addOnSuccessListener {
