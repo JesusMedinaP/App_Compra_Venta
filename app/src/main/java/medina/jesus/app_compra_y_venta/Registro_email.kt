@@ -78,7 +78,7 @@ class Registro_email : AppCompatActivity() {
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                InsercionUsuarioDB()
+                InsercionDBEmail()
             }
             .addOnFailureListener{e->
                 progressDialog.dismiss()
@@ -92,7 +92,7 @@ class Registro_email : AppCompatActivity() {
     //se crea directamente la tabla en Firebase con los campos específicados
     //en el hashmap
     //Además manejamos el error tanto de si se puede completar la operación como si no.
-    private fun InsercionUsuarioDB() {
+    private fun InsercionDBEmail() {
         progressDialog.setMessage("Guardando Información")
 
         val tiempo = Constantes.obtenerTiempoDis()

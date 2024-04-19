@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "664042999726",
+    "firebase_url": "https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "app-compra-y-venta-de42d",
     "storage_bucket": "app-compra-y-venta-de42d.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "medina.jesus.app_compra_y_venta"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "664042999726-fckktn30vd3vu6t1fe0au22pptr7b84c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "medina.jesus.app_compra_y_venta",
+            "certificate_hash": "1da4ea303bb0d60b8db48548a08eb5ea36774035"
+          }
+        },
+        {
+          "client_id": "664042999726-n60cd8vhhigvqd49lfklhma4lrn6f541.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAMsD8WFFNY3JKCPPvrSZnK8Tw83SYQNT8"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664042999726-n60cd8vhhigvqd49lfklhma4lrn6f541.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
