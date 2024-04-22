@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">App_Compra_y_Venta</string>
     <string name="default_web_client_id">664042999726-n60cd8vhhigvqd49lfklhma4lrn6f541.apps.googleusercontent.com</string>
-    
+
     <string name="Item_Inicio">Inicio</string>
     <string name="Item_Chats">Chats</string>
     <string name="Item_Vender">Vender</string>
     <string name="Item_Mis_Anuncios">Mis Anuncios</string>
     <string name="Item_Cuenta">Cuenta</string>
-    
+
     <string name="TituloRL">Título</string>
-    
+
     <string name="Ingresar_Email">Ingresar con email</string>
     <string name="Ingresar_Google">Ingresar con Google</string>
 
@@ -39,8 +39,16 @@
     <string name="Tv_Telefono">999999999</string>
     <string name="Txt_Estado_Cuenta">Estado de cuenta: </string>
     <string name="Tv_Estado_Cuenta">No Verificado</string>
-    
+
     <string name="Txt_Opciones">Opciones</string>
     <string name="Btn_Editar_Perfil">Editar Perfil</string>
     <string name="Btn_Cerrar_Sesion">Cerrar Sesión</string>
+
+    <!--Editar Perfil-->
+    <string name="Txt_Editar_Perfil">Editar Perfil</string>
+    <string name="Et_Nombres">Nombres Completos</string>
+    <string name="Et_Fecha_Nacimiento">Fecha de Nacimiento</string>
+    <string name="Cod_Tel">+00</string>
+    <string name="Et_Telefono">Teléfono</string>
+    <string name="Btn_Actualizar">Actualizar</string>
 </resources>

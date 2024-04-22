@@ -56,4 +56,5 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("com.hbb20:ccp:2.7.0")
 }

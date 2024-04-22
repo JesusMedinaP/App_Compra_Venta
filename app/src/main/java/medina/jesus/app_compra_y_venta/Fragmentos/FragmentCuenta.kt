@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.EditarPerfil
 import medina.jesus.app_compra_y_venta.OpcionesLogin
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.FragmentCuentaBinding
@@ -47,6 +48,10 @@ class FragmentCuenta : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         leerInfo()
+
+        binding.BtnEditarPerfil.setOnClickListener {
+            startActivity(Intent(mContext, EditarPerfil::class.java))
+        }
 
         //Método para poder cerrar sesión y volver a la vista de login.
         binding.BtnCerrarSesion.setOnClickListener {
