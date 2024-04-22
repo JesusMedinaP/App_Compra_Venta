@@ -7,7 +7,6 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import medina.jesus.app_compra_y_venta.databinding.ActivityRegistroEmailBinding
 
 class Registro_email : AppCompatActivity() {

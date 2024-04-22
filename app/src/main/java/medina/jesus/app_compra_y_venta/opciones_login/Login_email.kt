@@ -4,12 +4,10 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.MainActivity
-import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.Registro_email
 import medina.jesus.app_compra_y_venta.databinding.ActivityLoginEmailBinding
 

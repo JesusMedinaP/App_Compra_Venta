@@ -51,4 +51,14 @@
     <string name="Cod_Tel">+00</string>
     <string name="Et_Telefono">Teléfono</string>
     <string name="Btn_Actualizar">Actualizar</string>
+
+    <!-- Crear Anuncio -->
+    <string name="Et_Marca">Nombre de la marca</string>
+    <string name="Et_Categoria">Categoría</string>
+    <string name="Condicion">Condición</string>
+    <string name="Ubicación">Ubicación</string>
+    <string name="Et_Precio">Precio</string>
+    <string name="Et_Titulo">Titulo</string>
+    <string name="Et_Descripcion">Descripción</string>
+    <string name="Btn_Crear_Anuncio">Crear Anuncio</string>
 </resources>

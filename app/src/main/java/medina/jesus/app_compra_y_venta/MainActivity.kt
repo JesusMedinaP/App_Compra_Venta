@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import medina.jesus.app_compra_y_venta.Anuncios.CrearAnuncio
 import medina.jesus.app_compra_y_venta.Fragmentos.FragmentChats
 import medina.jesus.app_compra_y_venta.Fragmentos.FragmentCuenta
 import medina.jesus.app_compra_y_venta.Fragmentos.FragmentInicio
@@ -54,6 +55,9 @@ class MainActivity : AppCompatActivity() {
                     false
                 }
             }
+        }
+        binding.FAB.setOnClickListener {
+            startActivity(Intent(this, CrearAnuncio::class.java))
         }
     }
 
