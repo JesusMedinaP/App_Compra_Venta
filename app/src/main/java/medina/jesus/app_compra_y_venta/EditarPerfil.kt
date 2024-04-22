@@ -58,7 +58,7 @@ class EditarPerfil : AppCompatActivity() {
     private var telefono = ""
     private fun validarInfo() {
         nombres = binding.EtNombres.text.toString().trim()
-        fecha_nacimiento = binding.EtFechaNacimiento.toString().trim()
+        fecha_nacimiento = binding.EtFechaNacimiento.text.toString().trim()
         codigo = binding.selectorCod.selectedCountryCodeWithPlus
         telefono = binding.EtTelefono.text.toString().trim()
 
