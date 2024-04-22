@@ -2,6 +2,8 @@ package medina.jesus.app_compra_y_venta
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.view.Menu
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -29,6 +31,10 @@ class EditarPerfil : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
 
         cargarInfo()
+
+        binding.FABCambiarImg.setOnClickListener {
+            select_imagen_de()
+        }
     }
 
     private fun cargarInfo() {
@@ -82,5 +88,28 @@ class EditarPerfil : AppCompatActivity() {
                 }
 
             })
+    }
+
+    private fun select_imagen_de()
+    {
+        val popupMenu = PopupMenu(this, binding.FABCambiarImg)
+
+        popupMenu.menu.add(Menu.NONE, 1, 1, "Cámara")
+        popupMenu.menu.add(Menu.NONE, 2, 2, "Galería")
+
+        popupMenu.show()
+
+        popupMenu.setOnMenuItemClickListener { item ->
+            val itemId = item.itemId
+            if(itemId == 1)
+            {
+                // Cámara
+            }else if(itemId == 2)
+            {
+                //Galería
+            }
+            return@setOnMenuItemClickListener true
+        }
+
     }
 }
