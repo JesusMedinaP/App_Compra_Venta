@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.databinding.ActivityEditarPerfilBinding
 
 class EditarPerfil : AppCompatActivity() {
@@ -80,17 +81,15 @@ class EditarPerfil : AppCompatActivity() {
 
                     //Transformación del código del país sin el +
                     try {
-                        if (codTelefono != "")
-                        {
                             val codigo = codTelefono.replace("+", "").toInt()
                             binding.selectorCod.setCountryForPhoneCode(codigo)
-                        }
                     }catch (e: Exception){
-                        Toast.makeText(
-                            this@EditarPerfil,
-                            "${e.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        //Comentado para poder eliminar el mensaje que sale al cargar la vista
+//                        Toast.makeText(
+//                            this@EditarPerfil,
+//                            "${e.message}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     }
                 }
 
@@ -98,6 +97,65 @@ class EditarPerfil : AppCompatActivity() {
                 }
 
             })
+    }
+
+    private fun subirImagenAlStorage()
+    {
+        progressDialog.setMessage("Subiendo imagen a Storage")
+        progressDialog.show()
+
+        val rutaImagen = "imagenesPerfil/" + firebaseAuth.uid
+        val ref = FirebaseStorage.getInstance().getReference(rutaImagen)
+        ref.putFile(imageUri!!)
+            .addOnSuccessListener { taskSnapShot ->
+                val uriTask = taskSnapShot.storage.downloadUrl
+                while (!uriTask.isSuccessful);
+                val urlImagenCargada = uriTask.result.toString()
+                if(uriTask.isSuccessful)
+                {
+                    actualizarImagenDB(urlImagenCargada)
+                }
+            }
+            .addOnFailureListener{e->
+                progressDialog.dismiss()
+                Toast.makeText(
+                    applicationContext,
+                    "${e.message}",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
+
+    private fun actualizarImagenDB(urlImagenCargada: String) {
+        progressDialog.setMessage("Actualizando Imagen")
+        progressDialog.show()
+
+        val hashMap : HashMap<String, Any> = HashMap()
+        if(imageUri != null)
+        {
+            hashMap["urlImagenPerfil"] = urlImagenCargada
+        }
+
+        val ref = FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
+        ref.child(firebaseAuth.uid!!)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(
+                    applicationContext,
+                    "Imagen de perfil actualizada con éxito",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Toast.makeText(
+                    applicationContext,
+                    "${e.message}",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
     }
 
     private fun select_imagen_de()
@@ -173,7 +231,9 @@ class EditarPerfil : AppCompatActivity() {
             resultado ->
             if(resultado.resultCode == Activity.RESULT_OK)
             {
-                try{
+                subirImagenAlStorage()
+                //Se ha comentado tras comprobar que funcionaba el subir la imagen desde la galería
+                /*try{
                     Glide.with(this)
                         .load(imageUri)
                         .placeholder(R.drawable.img_perfil)
@@ -181,7 +241,7 @@ class EditarPerfil : AppCompatActivity() {
                 }catch (e : Exception)
                 {
 
-                }
+                }*/
             }else{
                 Toast.makeText(
                     this,
@@ -221,8 +281,10 @@ class EditarPerfil : AppCompatActivity() {
             {
                 val data = resultado.data
                 imageUri = data!!.data
+                subirImagenAlStorage()
 
-                try{
+                //Se ha comentado tras comprobar que funcionaba el subir la imagen desde la galería
+                /*try{
                     Glide.with(this)
                         .load(imageUri)
                         .placeholder(R.drawable.img_perfil)
@@ -230,7 +292,7 @@ class EditarPerfil : AppCompatActivity() {
                 }catch (e : Exception)
                 {
 
-                }
+                }*/
             }else{
                 Toast.makeText(
                     this,
