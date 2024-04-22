@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.MainActivity
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.Registro_email
@@ -69,19 +70,13 @@ class Login_email : AppCompatActivity() {
                 progressDialog.dismiss()
                 startActivity(Intent(this,MainActivity::class.java))
                 finishAffinity()
-                Toast.makeText(
-                    this,
-                    "Bienvenido",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,
+                    "Bienvenido")
             }
             .addOnFailureListener {e->
                 progressDialog.dismiss()
-                Toast.makeText(
-                    this,
-                    "No se pudo iniciar sesión debido a ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,
+                    "No se pudo iniciar sesión debido a ${e.message}")
             }
     }
 }

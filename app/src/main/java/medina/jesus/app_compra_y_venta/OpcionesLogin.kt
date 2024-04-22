@@ -72,7 +72,7 @@ class OpcionesLogin : AppCompatActivity() {
                 val cuenta = task.getResult(ApiException::class.java)
                 autenticationGoogle(cuenta.idToken)
             }catch (e : Exception){
-                Toast.makeText(this, "${e.message}",Toast.LENGTH_SHORT).show()
+                Constantes.toastConMensaje(this, "${e.message}")
             }
         }
     }
@@ -91,7 +91,7 @@ class OpcionesLogin : AppCompatActivity() {
                 }
             }
             .addOnFailureListener {
-                e->Toast.makeText(this, "${e.message}",Toast.LENGTH_SHORT).show()
+                e->Constantes.toastConMensaje(this, "${e.message}")
             }
     }
 
@@ -120,7 +120,7 @@ class OpcionesLogin : AppCompatActivity() {
 
         //URL de la DATABASE en caso de tener que usarla
         //https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app/
-        val ref = FirebaseDatabase.getInstance("https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app").getReference("Usuarios")
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
         ref.child(uidUsuario!!)
             .setValue(hashMap)
             .addOnSuccessListener {
@@ -130,11 +130,8 @@ class OpcionesLogin : AppCompatActivity() {
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
-                Toast.makeText(
-                    this,
-                    "No se ha podido registrar debido a ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,
+                    "No se ha podido registrar debido a ${e.message}")
             }
     }
 

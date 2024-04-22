@@ -62,7 +62,7 @@ class FragmentCuenta : Fragment() {
     }
 
     private fun leerInfo() {
-        val ref = FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
         ref.child("${firebaseAuth.uid}")
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -99,11 +99,8 @@ class FragmentCuenta : Fragment() {
                             .into(binding.IvPerfil)
                     }catch (e : Exception)
                     {
-                        Toast.makeText(
-                            mContext,
-                            "${e.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Constantes.toastConMensaje(mContext,
+                            "${e.message}")
                     }
 
                     if(proveedor == "Email")

@@ -43,13 +43,65 @@ class EditarPerfil : AppCompatActivity() {
 
         cargarInfo()
 
+        binding.BtnActualizar.setOnClickListener {
+            validarInfo()
+        }
+
         binding.FABCambiarImg.setOnClickListener {
             select_imagen_de()
         }
     }
 
+    private var nombres = ""
+    private var fecha_nacimiento = ""
+    private var codigo = ""
+    private var telefono = ""
+    private fun validarInfo() {
+        nombres = binding.EtNombres.text.toString().trim()
+        fecha_nacimiento = binding.EtFechaNacimiento.toString().trim()
+        codigo = binding.selectorCod.selectedCountryCodeWithPlus
+        telefono = binding.EtTelefono.text.toString().trim()
+
+        if(nombres.isEmpty())
+        {
+            Constantes.toastConMensaje(this, "Ingrese su nombre completo")
+        }else if(fecha_nacimiento.isEmpty())
+        {
+            Constantes.toastConMensaje(this, "Ingrese su fecha de nacimiento")
+        }else if(telefono.isEmpty())
+        {
+            Constantes.toastConMensaje(this, "Ingrese un teléfono")
+        }else{
+            actualizarInfo()
+        }
+    }
+
+    private fun actualizarInfo() {
+        progressDialog.setMessage("Actualizando información")
+
+        val hashMap: HashMap<String, Any> = HashMap()
+
+        hashMap["nombres"] = "${nombres}"
+        hashMap["fecha_nac"] = "${fecha_nacimiento}"
+        hashMap["codigoTelefono"] = "${codigo}"
+        hashMap["telefono"] = "${telefono}"
+
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
+        ref.child(firebaseAuth.uid!!)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Constantes.toastConMensaje(this, "Se actualizó la información correctamente")
+            }
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Constantes.toastConMensaje(this, "${e.message}")
+            }
+    }
+
+
     private fun cargarInfo() {
-        val ref = FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
         ref.child("${firebaseAuth.uid}")
             .addValueEventListener(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -72,11 +124,7 @@ class EditarPerfil : AppCompatActivity() {
                             .placeholder(R.drawable.img_perfil)
                             .into(binding.imgPerfil)
                     }catch (e: Exception){
-                        Toast.makeText(
-                            this@EditarPerfil,
-                            "${e.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Constantes.toastConMensaje(this@EditarPerfil, "${e.message}")
                     }
 
                     //Transformación del código del país sin el +
@@ -118,11 +166,7 @@ class EditarPerfil : AppCompatActivity() {
             }
             .addOnFailureListener{e->
                 progressDialog.dismiss()
-                Toast.makeText(
-                    applicationContext,
-                    "${e.message}",
-                    Toast.LENGTH_SHORT)
-                    .show()
+                Constantes.toastConMensaje(applicationContext, "${e.message}")
             }
     }
 
@@ -136,25 +180,17 @@ class EditarPerfil : AppCompatActivity() {
             hashMap["urlImagenPerfil"] = urlImagenCargada
         }
 
-        val ref = FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
         ref.child(firebaseAuth.uid!!)
             .updateChildren(hashMap)
             .addOnSuccessListener {
                 progressDialog.dismiss()
-                Toast.makeText(
-                    applicationContext,
-                    "Imagen de perfil actualizada con éxito",
-                    Toast.LENGTH_SHORT)
-                    .show()
+                Constantes.toastConMensaje(applicationContext,"Imagen de perfil actualizada con éxito")
             }
 
             .addOnFailureListener { e->
                 progressDialog.dismiss()
-                Toast.makeText(
-                    applicationContext,
-                    "${e.message}",
-                    Toast.LENGTH_SHORT)
-                    .show()
+                Constantes.toastConMensaje(applicationContext, "${e.message}")
             }
     }
 
@@ -206,11 +242,7 @@ class EditarPerfil : AppCompatActivity() {
             if(concedidoTodos){
                 imagenCamara()
             }else{
-                Toast.makeText(
-                    this,
-                    "El permiso de la cámara o almacenamiento ha sido denegado",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,"El permiso de la cámara o almacenamiento ha sido denegado")
             }
         }
 
@@ -243,11 +275,7 @@ class EditarPerfil : AppCompatActivity() {
 
                 }*/
             }else{
-                Toast.makeText(
-                    this,
-                    "Cancelado",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,"Cancelado")
             }
         }
 
@@ -259,11 +287,7 @@ class EditarPerfil : AppCompatActivity() {
             {
                 imagenGaleria()
             }else{
-                Toast.makeText(
-                    this,
-                    "El permiso de almacenamiento ha sido denegado",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,"El permiso de almacenamiento ha sido denegado")
             }
         }
 
@@ -294,11 +318,7 @@ class EditarPerfil : AppCompatActivity() {
 
                 }*/
             }else{
-                Toast.makeText(
-                    this,
-                    "Cancelado",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constantes.toastConMensaje(this,"Cancelado")
             }
         }
 }
