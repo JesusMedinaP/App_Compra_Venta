@@ -20,6 +20,7 @@ import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSeleccionada
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSeleccionada
 import medina.jesus.app_compra_y_venta.R
+import medina.jesus.app_compra_y_venta.SeleccionarUbicacion
 import medina.jesus.app_compra_y_venta.databinding.ActivityCrearAnuncioBinding
 
 class CrearAnuncio : AppCompatActivity() {
@@ -53,8 +54,14 @@ class CrearAnuncio : AppCompatActivity() {
 
         imagenSelecArrayList = ArrayList()
         cargarImagenes()
+
         binding.agregarImg.setOnClickListener {
             mostrarOpciones()
+        }
+
+        binding.Ubicacion.setOnClickListener {
+            val intent = Intent(this, SeleccionarUbicacion::class.java)
+            seleccionarUbicacionARL.launch(intent)
         }
 
         binding.BtnCrearAnuncio.setOnClickListener {
@@ -71,7 +78,7 @@ class CrearAnuncio : AppCompatActivity() {
     private var titulo = ""
     private var descripcion = ""
     private var latitud = 0.0
-    private var longitud = ""
+    private var longitud = 0.0
 
     private fun validarDatos()
     {
@@ -112,6 +119,24 @@ class CrearAnuncio : AppCompatActivity() {
             Constantes.toastConMensaje(this, "Agregar al menos una imagen")
         }else{
             agregarAnuncio()
+        }
+    }
+
+    private val seleccionarUbicacionARL = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){resultado ->
+        if(resultado.resultCode == Activity.RESULT_OK)
+        {
+            val data = resultado.data
+            if(data != null)
+            {
+                latitud = data.getDoubleExtra("latitud",0.0)
+                longitud = data.getDoubleExtra("longitud",0.0)
+                direccion = data.getStringExtra("direccion") ?: ""
+
+                binding.Ubicacion.setText(direccion)
+            }else{
+                Constantes.toastConMensaje(this, "Cancelado")
+            }
         }
     }
 

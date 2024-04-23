@@ -63,4 +63,8 @@
     <string name="Et_Descripcion">Descripción</string>
     <string name="Btn_Crear_Anuncio">Crear Anuncio</string>
     <string name="Ubicacion">Ubicación</string>
+
+    <!-- Mapas -->
+    <string name="Txt_Seleccionar_Ubicacion">Seleccione Ubicación</string>
+    <string name="Btn_listo">Listo</string>
 </resources>
