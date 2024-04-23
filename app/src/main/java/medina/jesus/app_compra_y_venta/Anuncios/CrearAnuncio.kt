@@ -14,6 +14,8 @@ import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSeleccionada
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSeleccionada
@@ -54,6 +56,10 @@ class CrearAnuncio : AppCompatActivity() {
         binding.agregarImg.setOnClickListener {
             mostrarOpciones()
         }
+
+        binding.BtnCrearAnuncio.setOnClickListener {
+            validarDatos()
+        }
     }
 
     //Campos a validar dentro de la creación del anuncio
@@ -71,11 +77,111 @@ class CrearAnuncio : AppCompatActivity() {
     {
         marca = binding.EtMarca.text.toString().trim()
         categoria = binding.Categoria.text.toString().trim()
-        condicion = binding.Condicion.text.toString().toString().trim()
+        condicion = binding.Condicion.text.toString().trim()
         direccion = binding.Ubicacion.text.toString().trim()
         precio = binding.EtPrecio.text.toString().trim()
         titulo = binding.EtTitulo.text.toString().trim()
         descripcion = binding.EtDescripcion.text.toString().trim()
+
+        if(marca.isEmpty())
+        {
+            binding.EtMarca.error = "Ingrese una marca"
+            binding.EtMarca.requestFocus()
+        }else if (categoria.isEmpty())
+        {
+            binding.Categoria.error = "Ingrese una categoría"
+            binding.Categoria.requestFocus()
+        }else if(condicion.isEmpty())
+        {
+            binding.Condicion.error = "Ingrese una condición"
+            binding.Condicion.requestFocus()
+        }else if(precio.isEmpty())
+        {
+            binding.EtPrecio.error = "Ingrese un precio"
+            binding.EtPrecio.requestFocus()
+        }else if(titulo.isEmpty())
+        {
+            binding.EtTitulo.error = "Ingrese un título"
+            binding.EtTitulo.requestFocus()
+        }else if(descripcion.isEmpty())
+        {
+            binding.EtDescripcion.error = "Ingrese una descripción"
+            binding.EtDescripcion.requestFocus()
+        }else if(imagenUri == null)
+        {
+            Constantes.toastConMensaje(this, "Agregar al menos una imagen")
+        }else{
+            agregarAnuncio()
+        }
+    }
+
+    private fun agregarAnuncio() {
+        progressDialog.setMessage("Agregando anuncio")
+        progressDialog.show()
+
+        val tiempo = Constantes.obtenerTiempoDis()
+
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        val keyId = ref.push().key
+
+        val hashMap = HashMap<String, Any>()
+        hashMap["id"] = "${keyId}"
+        hashMap["uid"] = "${firebaseAuth.uid}"
+        hashMap["marca"] = "${marca}"
+        hashMap["categoria"] = "${categoria}"
+        hashMap["condicion"] = "${condicion}"
+        hashMap["direccion"] = "${direccion}"
+        hashMap["precio"] = "${precio}"
+        hashMap["titulo"] = "${titulo}"
+        hashMap["descripcion"] = "${descripcion}"
+        hashMap["estado"] = "${Constantes.ANUNCIO_DISPONIBLE}"
+        hashMap["tiempo"] = tiempo
+        hashMap["latitud"] = "${latitud}"
+        hashMap["tongitud"] = "${longitud}"
+
+        ref.child(keyId!!)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                cargarImagenesStorage(keyId)
+            }
+            .addOnFailureListener { e->
+                Constantes.toastConMensaje(this, "${e.message}")
+            }
+    }
+
+    private fun cargarImagenesStorage(keyId: String){
+        for (i in imagenSelecArrayList.indices)
+        {
+            val modeloImagenSel = imagenSelecArrayList[i]
+            val nombreImagen = modeloImagenSel.id
+            val rutaNombreImagen = "Anuncios/$nombreImagen"
+
+            val storageReference = FirebaseStorage.getInstance().getReference(rutaNombreImagen)
+            storageReference.putFile(modeloImagenSel.imagenUri!!)
+                .addOnSuccessListener { taskSnapShot->
+                    val uriTask = taskSnapShot.storage.downloadUrl
+                    while(!uriTask.isSuccessful);
+                    val urlImgCargada = uriTask.result
+
+                    if(uriTask.isSuccessful)
+                    {
+                        val hasMap = HashMap<String, Any>()
+                        hasMap["id"] = "${modeloImagenSel.imagenUri}"
+                        hasMap["imagenUrl"] = "${urlImgCargada}"
+
+                        val ref = Constantes.obtenerReferenciaAnunciosDB()
+                        ref.child(keyId).child("Imagenes")
+                            .child(nombreImagen)
+                            .updateChildren(hasMap)
+                    }
+                    progressDialog.dismiss()
+                    onBackPressedDispatcher.onBackPressed()
+                    Constantes.toastConMensaje(this, "Se publicó su anuncio")
+                }
+                .addOnFailureListener { e->
+                    Constantes.toastConMensaje(this, "${e.message}")
+                }
+        }
     }
 
     private fun mostrarOpciones() {
@@ -138,6 +244,7 @@ class CrearAnuncio : AppCompatActivity() {
                 val modeloImagenSeleccionada = ImagenSeleccionada(
                     tiempo, imagenUri, null, false
                 )
+                imagenSelecArrayList.add(modeloImagenSeleccionada)
                 cargarImagenes()
             }else{
                 Constantes.toastConMensaje(this,"Cancelado")
@@ -181,6 +288,7 @@ class CrearAnuncio : AppCompatActivity() {
                 val modeloImagenSeleccionada = ImagenSeleccionada(
                     tiempo, imagenUri, null, false
                 )
+                imagenSelecArrayList.add(modeloImagenSeleccionada)
                 cargarImagenes()
             }else{
                 Constantes.toastConMensaje(this,"Cancelado")

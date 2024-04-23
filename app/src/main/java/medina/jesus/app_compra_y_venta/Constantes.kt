@@ -55,7 +55,11 @@ object Constantes {
         ).show()
     }
 
-    public fun obtenerReferenciaUsuariosDB(): DatabaseReference {
+    fun obtenerReferenciaUsuariosDB(): DatabaseReference {
         return FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
+    }
+
+    fun obtenerReferenciaAnunciosDB(): DatabaseReference {
+        return FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Anuncios")
     }
 }
