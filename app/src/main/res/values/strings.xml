@@ -61,4 +61,5 @@
     <string name="Et_Titulo">Titulo</string>
     <string name="Et_Descripcion">Descripción</string>
     <string name="Btn_Crear_Anuncio">Crear Anuncio</string>
+    <string name="Ubicacion">Ubicación</string>
 </resources>

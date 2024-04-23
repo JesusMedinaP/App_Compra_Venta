@@ -75,7 +75,7 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/Categoria"
-                    android:text="@string/Et_Categoria"
+                    android:hint="@string/Et_Categoria"
                     android:inputType="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -97,7 +97,29 @@
 
                 <AutoCompleteTextView
                     android:id="@+id/Condicion"
-                    android:text="@string/Condicion"
+                    android:hint="@string/Condicion"
+                    android:inputType="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Coordenadas del vendedor -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_Ubicacion"
+                android:layout_below="@id/TIL_Condicion"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/Ubicacion"
+                    android:hint="@string/Ubicacion"
                     android:inputType="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -107,7 +129,7 @@
             <!-- Precio del producto -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TIL_Precio"
-                android:layout_below="@id/TIL_Condicion"
+                android:layout_below="@id/TIL_Ubicacion"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
