@@ -56,6 +56,9 @@ dependencies {
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
     implementation("com.google.firebase:firebase-storage")
+    // Maps SDK for Android
+    implementation ("com.google.android.gms:play-services-maps:18.2.0")
+    implementation ("com.google.android.libraries.places:places:3.3.0")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.hbb20:ccp:2.7.0")
 }

@@ -137,7 +137,7 @@ class CrearAnuncio : AppCompatActivity() {
         hashMap["estado"] = "${Constantes.ANUNCIO_DISPONIBLE}"
         hashMap["tiempo"] = tiempo
         hashMap["latitud"] = "${latitud}"
-        hashMap["tongitud"] = "${longitud}"
+        hashMap["longitud"] = "${longitud}"
 
         ref.child(keyId!!)
             .setValue(hashMap)
