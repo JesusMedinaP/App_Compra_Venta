@@ -15,6 +15,7 @@ object Constantes {
 
 
     val categorias = arrayOf(
+        "Todos",
         "Móviles",
         "Ordenador/Portatil",
         "Electrónica y electrodomésticos",
@@ -23,7 +24,24 @@ object Constantes {
         "Hogar y muebles",
         "Belleza y cuidado personal",
         "Libros",
-        "Deportes"
+        "Deportes",
+        "Juguetes y figuras",
+        "Mascotas"
+    )
+
+    val categoriasIcono = arrayOf(
+        R.drawable.ic_categoria_todos,
+        R.drawable.ic_categoria_moviles,
+        R.drawable.ic_categoria_ordenadores,
+        R.drawable.ic_categoria_electrodomesticos,
+        R.drawable.ic_categoria_vehiculos,
+        R.drawable.ic_categoria_videojuegos,
+        R.drawable.ic_categoria_muebles,
+        R.drawable.ic_categoria_belleza,
+        R.drawable.ic_categoria_libros,
+        R.drawable.ic_categoria_deportes,
+        R.drawable.ic_categoria_juguetes,
+        R.drawable.ic_categoria_mascotas
     )
 
     val condiciones = arrayOf(
