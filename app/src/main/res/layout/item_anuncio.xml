@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Mostrar la primera imagen del anuncio -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imagenIv"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_imagen"
+            android:layout_marginEnd="10dp"
+            android:scaleType="centerCrop"/>
+
+        <!-- Título del anuncio -->
+        <TextView
+            android:id="@+id/Tv_Titulo"
+            android:text="@string/Tv_Titulo"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/imagenIv"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
+
+        <!-- Descripción -->
+        <TextView
+            android:id="@+id/Tv_Descripcion"
+            android:text="@string/Tv_Descripcion"
+            android:maxLines="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imagenIv"
+            android:layout_below="@id/Tv_Titulo"
+            android:ellipsize="end"/>
+
+        <!-- Dirección -->
+        <TextView
+            android:id="@+id/Tv_Direccion"
+            android:text="@string/Tv_Direccion"
+            android:layout_toEndOf="@+id/imagenIv"
+            android:layout_below="@id/Tv_Descripcion"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--Condición -->
+        <TextView
+            android:id="@+id/Tv_Condicion"
+            android:text="@string/Tv_Condicion"
+            android:layout_toEndOf="@id/imagenIv"
+            android:layout_below="@id/Tv_Direccion"
+            android:textStyle="bold|italic"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--Símbolo precio -->
+        <TextView
+            android:id="@+id/Tv_Simbolo_Precio"
+            android:text="@string/Tv_Simbolo_Precio"
+            android:layout_below="@id/Tv_Direccion"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:textSize="13sp"
+            android:layout_toEndOf="@id/Tv_Condicion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Precio -->
+        <TextView
+            android:id="@+id/Tv_Precio"
+            android:text="@string/Tv_Precio"
+            android:layout_below="@id/Tv_Direccion"
+            android:layout_toEndOf="@id/Tv_Simbolo_Precio"
+            android:layout_marginTop="5dp"
+            android:textSize="13sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!--Fecha -->
+        <TextView
+            android:id="@+id/Tv_Fecha"
+            android:text="@string/Tv_Fecha"
+            android:layout_marginEnd="5dp"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/Tv_Direccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Agregar anuncio a favorito -->
+        <ImageButton
+            android:id="@+id/Ib_Favorito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/ic_no_favorito"/>
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

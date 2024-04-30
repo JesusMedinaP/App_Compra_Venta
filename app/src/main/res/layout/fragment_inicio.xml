@@ -64,4 +64,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <!-- Lista de Anuncios -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_anuncio"
+        android:layout_marginTop="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
