@@ -134,9 +134,9 @@ class CrearAnuncio : AppCompatActivity() {
                 direccion = data.getStringExtra("direccion") ?: ""
 
                 binding.Ubicacion.setText(direccion)
-            }else{
-                Constantes.toastConMensaje(this, "Cancelado")
             }
+        }else{
+            Constantes.toastConMensaje(this, "Cancelado")
         }
     }
 
@@ -202,11 +202,24 @@ class CrearAnuncio : AppCompatActivity() {
                     progressDialog.dismiss()
                     onBackPressedDispatcher.onBackPressed()
                     Constantes.toastConMensaje(this, "Se publicó su anuncio")
+                    limpiarCampos()
                 }
                 .addOnFailureListener { e->
                     Constantes.toastConMensaje(this, "${e.message}")
                 }
         }
+    }
+
+    private fun limpiarCampos()
+    {
+        imagenSelecArrayList.clear()
+        adaptadorImagenSel.notifyDataSetChanged()
+        binding.EtMarca.setText("")
+        binding.Categoria.setText("")
+        binding.Condicion.setText("")
+        binding.EtPrecio.setText("")
+        binding.EtTitulo.setText("")
+        binding.EtDescripcion.setText("")
     }
 
     private fun mostrarOpciones() {
