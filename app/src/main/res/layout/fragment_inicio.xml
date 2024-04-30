@@ -1,14 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Fragmentos.FragmentInicio">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- Seleccionar una ubicación -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/Item_Inicio" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/Tv_Ubicacion"
+            android:text="@string/Tv_Ubicacion"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:drawableStartCompat="@drawable/ic_ubicacion"
+            android:drawablePadding="10dp"
+            app:drawableEndCompat="@drawable/ic_siguiente"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Buscar un anuncio -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp">
+
+        <EditText
+            android:id="@+id/Et_buscar"
+            android:hint="@string/Et_buscar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            app:drawableStartCompat="@drawable/ic_buscar"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:text="@string/Txt_Categoria"
+        style="@style/TextAppearance.MaterialComponents.Overline"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- Lista de Categorías -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Rv_Categoria"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

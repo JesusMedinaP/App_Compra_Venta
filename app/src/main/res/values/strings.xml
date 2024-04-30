@@ -67,4 +67,10 @@
     <!-- Mapas -->
     <string name="Txt_Seleccionar_Ubicacion">Seleccione Ubicación</string>
     <string name="Btn_listo">Listo</string>
+
+    <!-- Fragmento Inicio -->
+    <string name="Tv_Ubicacion">Elija una ubicación</string>
+    <string name="Et_buscar">Buscar</string>
+    <string name="Txt_Categoria">Categorías</string>
+
 </resources>
