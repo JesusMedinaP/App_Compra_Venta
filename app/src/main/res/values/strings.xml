@@ -72,5 +72,6 @@
     <string name="Tv_Ubicacion">Elija una ubicación</string>
     <string name="Et_buscar">Buscar</string>
     <string name="Txt_Categoria">Categorías</string>
+    <string name="Tv_Categoria">Categoría</string>
 
 </resources>

@@ -59,6 +59,7 @@
         android:id="@+id/Rv_Categoria"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
+        tools:listitem="@layout/item_categoria_inicio"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
