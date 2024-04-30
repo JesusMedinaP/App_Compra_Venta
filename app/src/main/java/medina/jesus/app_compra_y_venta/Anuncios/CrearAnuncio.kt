@@ -102,6 +102,10 @@ class CrearAnuncio : AppCompatActivity() {
         {
             binding.Condicion.error = "Ingrese una condición"
             binding.Condicion.requestFocus()
+        }else if(direccion.isEmpty())
+        {
+            binding.Ubicacion.error = "Ingrese una ubicacion"
+            binding.Ubicacion.requestFocus()
         }else if(precio.isEmpty())
         {
             binding.EtPrecio.error = "Ingrese un precio"
