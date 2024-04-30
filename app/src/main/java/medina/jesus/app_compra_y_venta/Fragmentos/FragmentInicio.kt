@@ -1,60 +1,59 @@
 package medina.jesus.app_compra_y_venta.Fragmentos
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorCategoria
+import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.Modelo.Categoria
 import medina.jesus.app_compra_y_venta.R
+import medina.jesus.app_compra_y_venta.RvListenerCategoria
+import medina.jesus.app_compra_y_venta.databinding.FragmentInicioBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentInicio.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentInicio : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var binding : FragmentInicioBinding
+    private lateinit var contexto : Context
+
+    override fun onAttach(context: Context) {
+        contexto = context
+        super.onAttach(context)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inicio, container, false)
+        binding = FragmentInicioBinding.inflate(LayoutInflater.from(contexto), container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentInicio.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentInicio().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cargarCategorias()
+    }
+
+    private fun cargarCategorias()
+    {
+        val categoriaArrayList = ArrayList<Categoria>()
+        for(i in 0 until Constantes.categorias.size)
+        {
+            val modeloCategoria = Categoria(Constantes.categorias[i], Constantes.categoriasIcono[i])
+            categoriaArrayList.add(modeloCategoria)
+        }
+
+        val adaptadorCategoria = AdaptadorCategoria(
+            contexto,
+            categoriaArrayList,
+            object : RvListenerCategoria{
+                override fun onCategoriaClick(modeloCategoria: Categoria) {
+                    TODO("Not yet implemented")
                 }
             }
+        )
+
+        binding.RvCategoria.adapter = adaptadorCategoria
     }
 }
