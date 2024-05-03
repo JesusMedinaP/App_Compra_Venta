@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -16,11 +15,11 @@ import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ItemAnuncioBinding
 
-class AdaptadorAnuncio: Adapter<AdaptadorAnuncio.HolderAnuncio> {
+class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio> {
 
     private lateinit var binding: ItemAnuncioBinding
 
-    private lateinit var context : Context
+    private var context : Context
     private var anuncioArrayList : ArrayList<Anuncio>
     private var firebaseAuth : FirebaseAuth
 
@@ -31,7 +30,7 @@ class AdaptadorAnuncio: Adapter<AdaptadorAnuncio.HolderAnuncio> {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderAnuncio {
-        binding = ItemAnuncioBinding.inflate(LayoutInflater.from(context),parent,false)
+        binding = ItemAnuncioBinding.inflate(LayoutInflater.from(context), parent,false)
         return HolderAnuncio(binding.root)
     }
 
@@ -61,7 +60,7 @@ class AdaptadorAnuncio: Adapter<AdaptadorAnuncio.HolderAnuncio> {
 
     private fun cargarPrimeraImagenAnuncio(
         modeloAnuncio: Anuncio,
-        holder: HolderAnuncio
+        holder: AdaptadorAnuncio.HolderAnuncio
     ) {
         val idAnuncio = modeloAnuncio.id
         val ref = Constantes.obtenerReferenciaAnunciosDB()
@@ -77,12 +76,13 @@ class AdaptadorAnuncio: Adapter<AdaptadorAnuncio.HolderAnuncio> {
                                 .into(holder.imagenIv)
                         }catch (e:Exception)
                         {
+                            Constantes.toastConMensaje(context, "${e.message}")
                         }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    print(error.message)
                 }
             })
     }
@@ -95,7 +95,7 @@ class AdaptadorAnuncio: Adapter<AdaptadorAnuncio.HolderAnuncio> {
         var Tv_condicion = binding.TvCondicion
         var Tv_precio = binding.TvPrecio
         var Tv_fecha = binding.TvFecha
-        var Tv_fav = binding.IbFavorito
+        var Ib_fav = binding.IbFavorito
     }
 
 }
