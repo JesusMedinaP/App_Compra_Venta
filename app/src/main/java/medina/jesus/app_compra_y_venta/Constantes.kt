@@ -3,6 +3,7 @@ package medina.jesus.app_compra_y_venta
 import android.content.Context
 import android.text.format.DateFormat
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
@@ -61,6 +62,36 @@ object Constantes {
         calendario.timeInMillis = tiempo
 
         return DateFormat.format("dd/MM/yyyy", calendario).toString()
+    }
+
+    fun agregarAnuncioFavoritos(context: Context, idAnuncio: String)
+    {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val tiempo = obtenerTiempoDis()
+
+        val hashMap = HashMap<String, Any>()
+        hashMap["idAnuncio"] = idAnuncio
+        hashMap["tiempo"] = tiempo
+
+        val ref = obtenerReferenciaUsuariosDB()
+        ref.child(firebaseAuth.uid!!).child("Favoritos").child(idAnuncio)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                toastConMensaje(context, "Anuncio agregado a favoritos")
+            }
+            .addOnFailureListener { e-> toastConMensaje(context, "${e.message}") }
+    }
+
+    fun eliminarAnuncioFavoritos(context: Context, idAnuncio: String)
+    {
+        val firebaseAuth = FirebaseAuth.getInstance()
+        val ref = obtenerReferenciaUsuariosDB()
+        ref.child(firebaseAuth.uid!!).child("Favoritos").child(idAnuncio)
+            .removeValue()
+            .addOnSuccessListener {
+                toastConMensaje(context, "Anuncio eliminado de favoritos")
+            }
+            .addOnFailureListener { e-> toastConMensaje(context, "${e.message}") }
     }
 
     private const val REFERENCIADB =
