@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -11,22 +13,26 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.Filtro.FiltrarAnuncio
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ItemAnuncioBinding
 
-class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio> {
+class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Filterable {
 
     private lateinit var binding: ItemAnuncioBinding
 
     private var context : Context
-    private var anuncioArrayList : ArrayList<Anuncio>
+    var anuncioArrayList : ArrayList<Anuncio>
     private var firebaseAuth : FirebaseAuth
+    private var filtroLista : ArrayList<Anuncio>
+    private var filtro: FiltrarAnuncio ?= null
 
     constructor(context: Context, anuncioArrayList: ArrayList<Anuncio>) {
         this.context = context
         this.anuncioArrayList = anuncioArrayList
         firebaseAuth = FirebaseAuth.getInstance()
+        this.filtroLista = anuncioArrayList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderAnuncio {
@@ -96,6 +102,13 @@ class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio> {
         var Tv_precio = binding.TvPrecio
         var Tv_fecha = binding.TvFecha
         var Ib_fav = binding.IbFavorito
+    }
+
+    override fun getFilter(): Filter {
+        if(filtro == null){
+            filtro = FiltrarAnuncio(this, filtroLista)
+        }
+        return filtro as FiltrarAnuncio
     }
 
 }

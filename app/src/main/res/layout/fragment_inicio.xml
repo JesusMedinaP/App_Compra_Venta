@@ -27,24 +27,42 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Buscar un anuncio -->
-    <com.google.android.material.card.MaterialCardView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="5dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="10dp">
+        android:weightSum="5">
 
-        <EditText
-            android:id="@+id/Et_buscar"
-            android:hint="@string/Et_buscar"
+        <!-- Buscar un anuncio -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:drawablePadding="10dp"
-            app:drawableStartCompat="@drawable/ic_buscar"/>
+            app:cardCornerRadius="5dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="10dp"
+            android:layout_weight="4">
 
-    </com.google.android.material.card.MaterialCardView>
+            <EditText
+                android:id="@+id/Et_buscar"
+                android:hint="@string/Et_buscar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                app:drawableStartCompat="@drawable/ic_buscar"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageButton
+            android:id="@+id/Ib_Limpiar"
+            android:src="@drawable/ic_limpiar_busqueda"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <TextView
         android:text="@string/Txt_Categoria"
