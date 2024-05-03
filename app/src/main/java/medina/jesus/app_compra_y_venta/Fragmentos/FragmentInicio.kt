@@ -15,14 +15,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorAnuncio
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorCategoria
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.Modelo.Categoria
-import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.RvListenerCategoria
 import medina.jesus.app_compra_y_venta.SeleccionarUbicacion
 import medina.jesus.app_compra_y_venta.databinding.FragmentInicioBinding
@@ -139,8 +137,8 @@ class FragmentInicio : Fragment() {
                         val modeloAnuncio = ds.getValue(Anuncio::class.java)
                         println("Esto es el modelo anuncio " + modeloAnuncio)
                         val distancia = calcularDistanciaKM(
-                            modeloAnuncio?.latitud?: 0.0,
-                            modeloAnuncio?.longitud?: 0.0
+                            modeloAnuncio?.latitud ?: 0.0,
+                            modeloAnuncio?.longitud ?: 0.0
                         )
                         if(categoria == "Todos")
                         {
@@ -158,6 +156,7 @@ class FragmentInicio : Fragment() {
                     }catch (e :Exception)
                     {
                         Constantes.toastConMensaje(contexto, "Estoy fallando en el bucle for ${e.message}")
+                        println(e.message)
                     }
                 }
                 adaptadorAnuncio = AdaptadorAnuncio(contexto, anuncios)
