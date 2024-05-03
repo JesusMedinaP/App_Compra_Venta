@@ -3,6 +3,8 @@ package medina.jesus.app_compra_y_venta.Fragmentos
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,6 +43,35 @@ class Fragment_Fav_Anuncios : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
         cargarAnunciosFavoritos()
+
+        binding.EtBuscar.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(filtro: CharSequence?, start: Int, before: Int, count: Int) {
+                try{
+                    val consulta = filtro.toString()
+                    anunciosAdaptador.filter.filter(consulta)
+                }catch (e:Exception){
+                    println(e.message)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+        binding.IbLimpiar.setOnClickListener {
+            val consulta = binding.EtBuscar.text.toString().trim()
+            if(consulta.isNotEmpty()){
+                binding.EtBuscar.setText("")
+                Constantes.toastConMensaje(contexto, "Se ha limpiado la busqueda")
+            }else{
+                Constantes.toastConMensaje(contexto, "No se ha ingresado una consulta")
+            }
+        }
     }
 
     private fun cargarAnunciosFavoritos() {
