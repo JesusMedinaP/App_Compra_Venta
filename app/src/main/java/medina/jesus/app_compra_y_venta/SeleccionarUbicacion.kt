@@ -108,7 +108,7 @@ class SeleccionarUbicacion : AppCompatActivity() , OnMapReadyCallback {
         }
 
         binding.IbRegresar.setOnClickListener {
-            finishAffinity()
+            finish()
         }
     }
 

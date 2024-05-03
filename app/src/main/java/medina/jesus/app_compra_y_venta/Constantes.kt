@@ -74,10 +74,10 @@ object Constantes {
     }
 
     fun obtenerReferenciaUsuariosDB(): DatabaseReference {
-        return FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Usuarios")
+        return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Usuarios")
     }
 
     fun obtenerReferenciaAnunciosDB(): DatabaseReference {
-        return FirebaseDatabase.getInstance(Constantes.REFERENCIADB).getReference("Anuncios")
+        return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Anuncios")
     }
 }
