@@ -1,60 +1,70 @@
 package medina.jesus.app_compra_y_venta.Fragmentos
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import medina.jesus.app_compra_y_venta.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorAnuncio
+import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.Modelo.Anuncio
+import medina.jesus.app_compra_y_venta.databinding.FragmentMisAnunciosPublicadosBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment_Mis_Anuncios_Publicados.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment_Mis_Anuncios_Publicados : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var binding: FragmentMisAnunciosPublicadosBinding
+    private lateinit var contexto : Context
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var misAnuncios : ArrayList<Anuncio>
+    private lateinit var anunciosAdaptador : AdaptadorAnuncio
+
+    override fun onAttach(context: Context) {
+        this.contexto = context
+        super.onAttach(context)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__mis__anuncios__publicados, container, false)
+        binding = FragmentMisAnunciosPublicadosBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment_Mis_Anuncios_Publicados.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment_Mis_Anuncios_Publicados().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        firebaseAuth = FirebaseAuth.getInstance()
+        cargarMisAnuncios()
+    }
+
+    private fun cargarMisAnuncios() {
+        misAnuncios = ArrayList()
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.orderByChild("uid").equalTo(firebaseAuth.uid!!)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    misAnuncios.clear()
+                    for(ds in snapshot.children){
+                        try{
+                            val modeloAnuncio = ds.getValue(Anuncio::class.java)
+                            misAnuncios.add(modeloAnuncio!!)
+                        }catch (e: Exception){
+                            Constantes.toastConMensaje(contexto, "Error al cargar mis anuncios")
+                            println(e.message)
+                        }
+                    }
+                    anunciosAdaptador = AdaptadorAnuncio(contexto, misAnuncios)
+                    binding.misAnunciosRV.adapter = anunciosAdaptador
                 }
-            }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
     }
 }
