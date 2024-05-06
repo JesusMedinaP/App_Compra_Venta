@@ -83,4 +83,12 @@
     <string name="Tv_Precio">00</string>
     <string name="Tv_Fecha">dd/MM/yyyy</string>
 
+    <string name="Txt_Detalle_Info">Detalle del anuncio</string>
+    <string name="Tv_Categoria_Detalle">Categoría del anuncio</string>
+    <string name="Txt_titulo">Título</string>
+    <string name="Txt_Descipcion">Descripción</string>
+    <string name="Tv_Descripcion_Detalle">Descripción del anuncio</string>
+    <string name="Txt_Direccion">Dirección</string>
+    <string name="Txt_Descripcion_Vendedor">Descripción del vendedor</string>
+
 </resources>

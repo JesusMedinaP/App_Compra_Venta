@@ -1,6 +1,7 @@
 package medina.jesus.app_compra_y_venta.Adaptadores
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.DetalleAnuncio.DetalleAnuncio
 import medina.jesus.app_compra_y_venta.Filtro.FiltrarAnuncio
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.R
@@ -64,6 +66,12 @@ class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Fi
         holder.Tv_condicion.text = condicion
         holder.Tv_precio.text = precio
         holder.Tv_fecha.text = formatoFecha
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetalleAnuncio::class.java)
+            intent.putExtra("idAnuncio", modeloAnuncio.id)
+            context.startActivity(intent)
+        }
 
         holder.Ib_fav.setOnClickListener {
             val favorito = modeloAnuncio.favorito
