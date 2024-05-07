@@ -222,6 +222,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/perfilVendeor"
                 android:layout_below="@id/Txt_Descripcion_Vendedor"
+                android:backgroundTint="#F2F4F4"
                 app:cardCornerRadius="10dp"
                 app:cardUseCompatPadding="true"
                 app:contentPadding="10dp"
