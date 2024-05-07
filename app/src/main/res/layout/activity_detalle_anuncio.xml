@@ -275,4 +275,66 @@
 
         </RelativeLayout>
     </ScrollView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/Opciones_LL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp">
+
+        <!-- Visualizar el mapa -->
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/ic_op_ubicacion"
+            app:iconGravity="top"
+            android:textAllCaps="true"
+            android:id="@+id/Btn_mapa"
+            android:text="@string/Btn_mapa"
+            android:layout_marginEnd="2dp"
+            android:textSize="12sp"
+            app:cornerRadius="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Llamadas telefónicas -->
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/ic_op_chat"
+            app:iconGravity="top"
+            android:textAllCaps="true"
+            android:id="@+id/Btn_llamar"
+            android:text="@string/Btn_llamar"
+            android:layout_marginEnd="2dp"
+            android:textSize="12sp"
+            app:cornerRadius="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Envío de SMS -->
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/ic_op_sms"
+            app:iconGravity="top"
+            android:textAllCaps="true"
+            android:id="@+id/Btn_SMS"
+            android:text="@string/Btn_SMS"
+            android:layout_marginEnd="2dp"
+            android:textSize="12sp"
+            app:cornerRadius="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Chat -->
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/ic_op_chat"
+            app:iconGravity="top"
+            android:textAllCaps="true"
+            android:id="@+id/Btn_Chat"
+            android:text="@string/Btn_Chat"
+            android:layout_marginEnd="2dp"
+            android:textSize="12sp"
+            app:cornerRadius="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>
