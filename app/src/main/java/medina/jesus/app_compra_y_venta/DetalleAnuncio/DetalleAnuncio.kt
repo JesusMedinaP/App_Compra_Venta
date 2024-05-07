@@ -72,6 +72,16 @@ class DetalleAnuncio : AppCompatActivity() {
         binding.BtnMapa.setOnClickListener {
             Constantes.mapaIntent(this, anuncioLatitud, anuncioLongitud)
         }
+
+        binding.BtnLlamar.setOnClickListener {
+//            val numeroTelefono = telVendedor
+            if(telVendedor.isEmpty())
+            {
+                Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número telefónico")
+            }else{
+                Constantes.llamarIntent(this, telVendedor)
+            }
+        }
     }
 
     private fun cargarInfo()

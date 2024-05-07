@@ -127,4 +127,11 @@ object Constantes {
             toastConMensaje(context, "No tienes instalado Google Maps")
         }
     }
+
+    fun llamarIntent (context: Context, telef : String)
+    {
+        val intent = Intent(Intent.ACTION_CALL)
+        intent.setData(Uri.parse("tel:${telef}"))
+        context.startActivity(intent)
+    }
 }
