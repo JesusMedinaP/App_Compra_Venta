@@ -92,11 +92,17 @@ class DetalleAnuncio : AppCompatActivity() {
         }
 
         binding.BtnSMS.setOnClickListener {
-            if(telVendedor.isEmpty())
+            if(ContextCompat.checkSelfPermission(applicationContext,
+                android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED)
             {
-                Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+                if(telVendedor.isEmpty())
+                {
+                    Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+                }else{
+                    Constantes.smsIntent(this, telVendedor)
+                }
             }else{
-                Constantes.smsIntent(this, telVendedor)
+                permisoSMS.launch(android.Manifest.permission.SEND_SMS)
             }
         }
     }
@@ -274,6 +280,20 @@ class DetalleAnuncio : AppCompatActivity() {
                 }
             }else{
                 Constantes.toastConMensaje(this@DetalleAnuncio, "El permiso para llamadas no está concedido")
+            }
+        }
+
+    private val permisoSMS =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){concesion->
+            if(concesion){
+                if(telVendedor.isEmpty())
+                {
+                    Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+                }else{
+                    Constantes.smsIntent(this, telVendedor)
+                }
+            }else{
+                Constantes.toastConMensaje(this@DetalleAnuncio, "El permiso de mensajes no está concedido")
             }
         }
 }
