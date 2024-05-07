@@ -300,7 +300,7 @@
 
         <!-- Llamadas telefónicas -->
         <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_op_chat"
+            app:icon="@drawable/ic_op_llamar"
             app:iconGravity="top"
             android:textAllCaps="true"
             android:id="@+id/Btn_llamar"
