@@ -38,11 +38,20 @@ class DetalleAnuncio : AppCompatActivity() {
 
         idAnuncio = intent.getStringExtra("idAnuncio").toString()
 
+        comprobarFavorito()
         cargarInfo()
         cargarImagenesAnuncio()
 
         binding.IbRegresar.setOnClickListener {
-            finish()
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.IbFav.setOnClickListener {
+            if(favorito){
+                Constantes.eliminarAnuncioFavoritos(this, idAnuncio)
+            }else{
+                Constantes.agregarAnuncioFavoritos(this, idAnuncio)
+            }
         }
     }
 
@@ -163,6 +172,26 @@ class DetalleAnuncio : AppCompatActivity() {
 
                     val adaptadorImagenSlider = AdaptadorImagenSlider(this@DetalleAnuncio, imagenSliderArrayList)
                     binding.ImagenSliderVP.adapter = adaptadorImagenSlider
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
+    }
+
+    fun comprobarFavorito()
+    {
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
+        ref.child("${firebaseAuth.uid}").child("Favoritos").child(idAnuncio)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    favorito = snapshot.exists()
+                    if(favorito){
+                        binding.IbFav.setImageResource(R.drawable.ic_anuncio_favorito)
+                    }else{
+                        binding.IbFav.setImageResource(R.drawable.ic_no_favorito)
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
