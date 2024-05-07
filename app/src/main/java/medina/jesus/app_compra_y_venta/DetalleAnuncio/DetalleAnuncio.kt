@@ -1,9 +1,13 @@
 package medina.jesus.app_compra_y_venta.DetalleAnuncio
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -74,11 +78,16 @@ class DetalleAnuncio : AppCompatActivity() {
         }
 
         binding.BtnLlamar.setOnClickListener {
-            if(telVendedor.isEmpty())
-            {
-                Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+            if(ContextCompat.checkSelfPermission(applicationContext,
+                android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED){
+                if(telVendedor.isEmpty())
+                {
+                    Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+                }else{
+                    Constantes.llamarIntent(this, telVendedor)
+                }
             }else{
-                Constantes.llamarIntent(this, telVendedor)
+                permisoLlamada.launch(Manifest.permission.CALL_PHONE)
             }
         }
 
@@ -253,4 +262,18 @@ class DetalleAnuncio : AppCompatActivity() {
                 Constantes.toastConMensaje(this, "${e.message}")
             }
     }
+
+    private val permisoLlamada =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){concesion->
+            if(concesion){
+                if(telVendedor.isEmpty())
+                {
+                    Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+                }else{
+                    Constantes.llamarIntent(this, telVendedor)
+                }
+            }else{
+                Constantes.toastConMensaje(this@DetalleAnuncio, "El permiso para llamadas no está concedido")
+            }
+        }
 }
