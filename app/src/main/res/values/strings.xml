@@ -92,8 +92,8 @@
     <string name="Txt_Descripcion_Vendedor">Descripción del vendedor</string>
 
     <!-- Opciones del detalle anuncio -->
-    <string name="Btn_mapa">Mapa</string>
-    <string name="Btn_llamar">LLam.</string>
+    <string name="Btn_mapa">Map</string>
+    <string name="Btn_llamar">LLam</string>
     <string name="Btn_SMS">SMS</string>
     <string name="Btn_Chat">Chat</string>
     
