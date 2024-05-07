@@ -74,12 +74,20 @@ class DetalleAnuncio : AppCompatActivity() {
         }
 
         binding.BtnLlamar.setOnClickListener {
-//            val numeroTelefono = telVendedor
             if(telVendedor.isEmpty())
             {
-                Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número telefónico")
+                Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
             }else{
                 Constantes.llamarIntent(this, telVendedor)
+            }
+        }
+
+        binding.BtnSMS.setOnClickListener {
+            if(telVendedor.isEmpty())
+            {
+                Constantes.toastConMensaje(this@DetalleAnuncio, "El vendedor no tiene número de teléfono")
+            }else{
+                Constantes.smsIntent(this, telVendedor)
             }
         }
     }

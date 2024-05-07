@@ -134,4 +134,12 @@ object Constantes {
         intent.setData(Uri.parse("tel:${telef}"))
         context.startActivity(intent)
     }
+
+    fun smsIntent(context: Context, telef : String)
+    {
+        val intent = Intent(Intent.ACTION_SENDTO)
+        intent.setData(Uri.parse("smsto:$telef"))
+        intent.putExtra("sms_body", "")
+        context.startActivity(intent)
+    }
 }
