@@ -1,15 +1,18 @@
 package medina.jesus.app_compra_y_venta.DetalleAnuncio
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSlider
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.MainActivity
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSlider
 import medina.jesus.app_compra_y_venta.R
@@ -52,6 +55,18 @@ class DetalleAnuncio : AppCompatActivity() {
             }else{
                 Constantes.agregarAnuncioFavoritos(this, idAnuncio)
             }
+        }
+
+        binding.IbEliminar.setOnClickListener {
+            val alertDialog = MaterialAlertDialogBuilder(this)
+            alertDialog.setTitle("Eliminar Anuncio")
+                .setMessage("¿Estás seguro de eliminar este anuncio?")
+                .setPositiveButton("Eliminar"){ dialog, which ->
+                    eliminarAnuncio()
+                }
+                .setNegativeButton("Cancelar"){ dialog, which ->
+                    dialog.dismiss()
+                }.show()
         }
     }
 
@@ -200,4 +215,20 @@ class DetalleAnuncio : AppCompatActivity() {
             })
     }
 
+
+    private fun eliminarAnuncio()
+    {
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.child(idAnuncio)
+            .removeValue()
+            .addOnSuccessListener {
+                startActivity((Intent(this@DetalleAnuncio, MainActivity::class.java)))
+                finishAffinity()
+                Constantes.toastConMensaje(this, "Se eliminó el anuncio con éxito")
+
+            }
+            .addOnFailureListener { e->
+                Constantes.toastConMensaje(this, "${e.message}")
+            }
+    }
 }
