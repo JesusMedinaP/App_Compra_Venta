@@ -1,6 +1,8 @@
 package medina.jesus.app_compra_y_venta
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.text.format.DateFormat
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -110,5 +112,19 @@ object Constantes {
 
     fun obtenerReferenciaAnunciosDB(): DatabaseReference {
         return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Anuncios")
+    }
+
+    fun mapaIntent(context: Context, latitud : Double, longitud : Double)
+    {
+        val googleMapaIntentUri = Uri.parse("http://maps.google.com/maps?daddr=$latitud,$longitud")
+
+        val mapIntent = Intent(Intent.ACTION_VIEW, googleMapaIntentUri)
+        mapIntent.setPackage("com.google.android.apps.maps")
+        if(mapIntent.resolveActivity(context.packageManager)!=null){
+            /*La app de Google Maps está instalada*/
+            context.startActivity(mapIntent)
+        }else{
+            toastConMensaje(context, "No tienes instalado Google Maps")
+        }
     }
 }

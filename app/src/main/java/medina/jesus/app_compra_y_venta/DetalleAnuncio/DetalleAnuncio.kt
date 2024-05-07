@@ -68,6 +68,10 @@ class DetalleAnuncio : AppCompatActivity() {
                     dialog.dismiss()
                 }.show()
         }
+
+        binding.BtnMapa.setOnClickListener {
+            Constantes.mapaIntent(this, anuncioLatitud, anuncioLongitud)
+        }
     }
 
     private fun cargarInfo()
@@ -86,8 +90,8 @@ class DetalleAnuncio : AppCompatActivity() {
                         val condicion = modeloAnuncio.condicion
                         val categoria = modeloAnuncio.categoria
                         val precio = modeloAnuncio.precio
-                        val anuncioLatitud = modeloAnuncio.latitud
-                        val anuncioLongitud = modeloAnuncio.longitud
+                        anuncioLatitud = modeloAnuncio.latitud
+                        anuncioLongitud = modeloAnuncio.longitud
                         val tiempo = modeloAnuncio.tiempo
 
                         val formatoFecha = Constantes.obtenerFecha(tiempo)
