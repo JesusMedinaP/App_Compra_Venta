@@ -29,15 +29,29 @@ class AdaptadorImagenSeleccionada(
     override fun onBindViewHolder(holder: HolderImagenSeleccionada, position: Int) {
         val modelo = imagenesSeleccionadasArrayList[position]
 
-        val imagenUri = modelo.imagenUri
-
-        try {
-            Glide.with(context)
-                .load(imagenUri)
-                .placeholder(R.drawable.item_imagen)
-                .into(holder.item_imagen)
-        }catch (e : Exception)
-        {
+        //Diferenciación entre las imágenes que se obtienen desde
+        //Firebase y las que se obtienen desde la cámara o galería
+        if(modelo.internetOrigin){
+            try {
+                val imagenUrl = modelo.imagenUrl
+                Glide.with(context)
+                    .load(imagenUrl)
+                    .placeholder(R.drawable.item_imagen)
+                    .into(binding.itemImagen)
+            }catch (e : Exception){
+                println(e.message)
+            }
+        }else{
+            try {
+                val imagenUri = modelo.imagenUri
+                Glide.with(context)
+                    .load(imagenUri)
+                    .placeholder(R.drawable.item_imagen)
+                    .into(holder.item_imagen)
+            }catch (e : Exception)
+            {
+                println(e.message)
+            }
         }
 
         holder.boton_cerrar.setOnClickListener {

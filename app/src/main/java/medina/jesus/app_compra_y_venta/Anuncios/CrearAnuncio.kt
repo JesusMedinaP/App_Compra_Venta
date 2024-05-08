@@ -191,8 +191,39 @@ class CrearAnuncio : AppCompatActivity() {
         {
             Constantes.toastConMensaje(this, "Agregar al menos una imagen")
         }else{
-            agregarAnuncio()
+            if(edicion){
+                actualizarAnuncio()
+            }else{
+                agregarAnuncio()
+            }
         }
+    }
+
+    private fun actualizarAnuncio() {
+        progressDialog.setMessage("Actualizando anuncio")
+        progressDialog.show()
+
+        val hashMap = HashMap<String, Any>()
+        hashMap["marca"] = "${marca}"
+        hashMap["categoria"] = "${categoria}"
+        hashMap["condicion"] = "${condicion}"
+        hashMap["direccion"] = "${direccion}"
+        hashMap["precio"] = "${precio}"
+        hashMap["titulo"] = "${titulo}"
+        hashMap["descripcion"] = "${descripcion}"
+        hashMap["latitud"] = latitud
+        hashMap["longitud"] = longitud
+
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.child(idAnuncioEditado)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                cargarImagenesStorage(idAnuncioEditado)
+            }
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Constantes.toastConMensaje(this, "${e.message}")
+            }
     }
 
     private val seleccionarUbicacionARL = registerForActivityResult(
@@ -251,35 +282,38 @@ class CrearAnuncio : AppCompatActivity() {
         for (i in imagenSelecArrayList.indices)
         {
             val modeloImagenSel = imagenSelecArrayList[i]
-            val nombreImagen = modeloImagenSel.id
-            val rutaNombreImagen = "Anuncios/$nombreImagen"
 
-            val storageReference = FirebaseStorage.getInstance().getReference(rutaNombreImagen)
-            storageReference.putFile(modeloImagenSel.imagenUri!!)
-                .addOnSuccessListener { taskSnapShot->
-                    val uriTask = taskSnapShot.storage.downloadUrl
-                    while(!uriTask.isSuccessful);
-                    val urlImgCargada = uriTask.result
+            if(!modeloImagenSel.internetOrigin){
+                val nombreImagen = modeloImagenSel.id
+                val rutaNombreImagen = "Anuncios/$nombreImagen"
 
-                    if(uriTask.isSuccessful)
-                    {
-                        val hasMap = HashMap<String, Any>()
-                        hasMap["id"] = "${modeloImagenSel.imagenUri}"
-                        hasMap["imagenUrl"] = "${urlImgCargada}"
+                val storageReference = FirebaseStorage.getInstance().getReference(rutaNombreImagen)
+                storageReference.putFile(modeloImagenSel.imagenUri!!)
+                    .addOnSuccessListener { taskSnapShot->
+                        val uriTask = taskSnapShot.storage.downloadUrl
+                        while(!uriTask.isSuccessful);
+                        val urlImgCargada = uriTask.result
 
-                        val ref = Constantes.obtenerReferenciaAnunciosDB()
-                        ref.child(keyId).child("Imagenes")
-                            .child(nombreImagen)
-                            .updateChildren(hasMap)
+                        if(uriTask.isSuccessful)
+                        {
+                            val hasMap = HashMap<String, Any>()
+                            hasMap["id"] = "${modeloImagenSel.imagenUri}"
+                            hasMap["imagenUrl"] = "${urlImgCargada}"
+
+                            val ref = Constantes.obtenerReferenciaAnunciosDB()
+                            ref.child(keyId).child("Imagenes")
+                                .child(nombreImagen)
+                                .updateChildren(hasMap)
+                        }
+                        progressDialog.dismiss()
+                        onBackPressedDispatcher.onBackPressed()
+                        Constantes.toastConMensaje(this, "Se publicó su anuncio")
+                        limpiarCampos()
                     }
-                    progressDialog.dismiss()
-                    onBackPressedDispatcher.onBackPressed()
-                    Constantes.toastConMensaje(this, "Se publicó su anuncio")
-                    limpiarCampos()
-                }
-                .addOnFailureListener { e->
-                    Constantes.toastConMensaje(this, "${e.message}")
-                }
+                    .addOnFailureListener { e->
+                        Constantes.toastConMensaje(this, "${e.message}")
+                    }
+            }
         }
     }
 

@@ -13,6 +13,7 @@
         <ImageView
             android:id="@+id/item_imagen"
             android:src="@drawable/item_imagen"
+            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
