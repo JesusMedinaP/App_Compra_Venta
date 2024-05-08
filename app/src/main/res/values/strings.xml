@@ -99,4 +99,9 @@
     
     <string name="imagen_Contador_Tv">1</string>
 
+    <!-- Cuadro de diálogo eliminar Imagen -->
+    <string name="Txt_Eliminar">¿Estás seguro de querer eliminar la imagen?</string>
+    <string name="Btn_Si">Si</string>
+    <string name="Btn_Cancelar">Cancelar</string>
+
 </resources>

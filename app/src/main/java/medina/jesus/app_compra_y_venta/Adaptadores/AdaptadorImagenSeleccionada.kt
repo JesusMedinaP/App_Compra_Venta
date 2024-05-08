@@ -1,5 +1,6 @@
 package medina.jesus.app_compra_y_venta.Adaptadores
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSeleccionada
@@ -59,7 +61,23 @@ class AdaptadorImagenSeleccionada(
 
         holder.boton_cerrar.setOnClickListener {
             if(modelo.internetOrigin){
-                eliminarImagenFirebasse(modelo, holder, position)
+                val btn_si : MaterialButton
+                val btn_cancelar : MaterialButton
+                val dialog = Dialog(context)
+
+                dialog.setContentView(R.layout.cuadro_dialogo_eliminar_imagen)
+                btn_si = dialog.findViewById(R.id.Btn_Si)
+                btn_cancelar = dialog.findViewById(R.id.Btn_Cancelar)
+
+                btn_si.setOnClickListener {
+                    eliminarImagenFirebasse(modelo, holder, position)
+                    dialog.dismiss()
+                }
+                btn_cancelar.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
+                dialog.setCanceledOnTouchOutside(false)
             }else{
                 imagenesSeleccionadasArrayList.remove(modelo)
                 notifyDataSetChanged()
