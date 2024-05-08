@@ -28,8 +28,8 @@
     <!-- Perfil Usuario (Fragment Cuenta) -->
     <string name="Txt_Perfil">Perfil de Usuario</string>
     <string name="Txt_Informacion">Información: </string>
-    <string name="Txt_Nombres">Nombres: </string>
-    <string name="Tv_Nombres">Nombres completos:</string>
+    <string name="Txt_Nombres">Nombre: </string>
+    <string name="Tv_Nombres">Nombre completo:</string>
     <string name="Txt_Email">Email: </string>
     <string name="Tv_Email">email@dominio.com</string>
     <string name="Txt_Nacimiento">Fecha de nacimiento: </string>
@@ -47,7 +47,7 @@
 
     <!--Editar Perfil-->
     <string name="Txt_Editar_Perfil">Editar Perfil</string>
-    <string name="Et_Nombres">Nombres Completos</string>
+    <string name="Et_Nombres">Nombre Completo</string>
     <string name="Et_Fecha_Nacimiento">Fecha de Nacimiento</string>
     <string name="Cod_Tel">+00</string>
     <string name="Et_Telefono">Teléfono</string>
@@ -108,4 +108,8 @@
 
     <!-- Cuadro de diálogo marcar como vendido -->
     <string name="Txt_Marcar_Vendido">¿Estás seguro de querer marcar como vendido el producto?</string>
+    
+    <string name="Txt_Perfil_Vendedor">Perfil del Vendedor</string>
+    <string name="Txt_Anuncios">Anuncios publicados:</string>
+    <string name="Tv_Num_Anuncios">0</string>
 </resources>
