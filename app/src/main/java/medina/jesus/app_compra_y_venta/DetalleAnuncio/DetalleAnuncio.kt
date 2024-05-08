@@ -1,6 +1,7 @@
 package medina.jesus.app_compra_y_venta.DetalleAnuncio
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -131,7 +133,7 @@ class DetalleAnuncio : AppCompatActivity() {
                 intent.putExtra("idAnuncio", idAnuncio)
                 startActivity(intent)
             }else if(itemId == 1){
-                marcarAnuncioVendido()
+                dialogMarcarVendido()
             }
 
             return@setOnMenuItemClickListener true
@@ -218,6 +220,28 @@ class DetalleAnuncio : AppCompatActivity() {
                 Constantes.toastConMensaje(this, "Error al marcar como vendido")
                 println(e.message)
             }
+    }
+
+    private fun dialogMarcarVendido()
+    {
+        val btn_Si : MaterialButton
+        val btn_Cancelar : MaterialButton
+        val dialog = Dialog(this)
+
+        dialog.setContentView(R.layout.cuadro_dialogo_marcar_vendido)
+
+        btn_Si = dialog.findViewById(R.id.Btn_Si)
+        btn_Cancelar = dialog.findViewById(R.id.Btn_Cancelar)
+
+        btn_Si.setOnClickListener {
+            marcarAnuncioVendido()
+            dialog.dismiss()
+        }
+        btn_Cancelar.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
     }
 
     private fun cargarInfoVendedor() {

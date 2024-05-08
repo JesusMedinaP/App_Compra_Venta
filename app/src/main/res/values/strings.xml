@@ -106,4 +106,6 @@
     <string name="Btn_Si">Si</string>
     <string name="Btn_Cancelar">Cancelar</string>
 
+    <!-- Cuadro de diálogo marcar como vendido -->
+    <string name="Txt_Marcar_Vendido">¿Estás seguro de querer marcar como vendido el producto?</string>
 </resources>
