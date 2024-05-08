@@ -6,7 +6,9 @@ import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorAnuncio
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ActivityDetalleVendedorBinding
 
@@ -22,12 +24,43 @@ class DetalleVendedor : AppCompatActivity() {
         uidVendedor = intent.getStringExtra("uidVendedor").toString()
 
         cargarInfoVendedor()
+        cargarAnunciosVendedor()
 
         binding.icRegresar.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
     }
 
+    private fun cargarAnunciosVendedor()
+    {
+        val anunciosArrayList : ArrayList<Anuncio> = ArrayList()
+
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.orderByChild("uid").equalTo(uidVendedor)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    anunciosArrayList.clear()
+                    for(ds in snapshot.children){
+                        try{
+                            val modeloAnuncio = ds.getValue(Anuncio::class.java)
+                            anunciosArrayList.add(modeloAnuncio!!)
+                        }catch(e : Exception){
+                            println(e.message)
+                        }
+                    }
+                    val adaptador = AdaptadorAnuncio(this@DetalleVendedor, anunciosArrayList)
+                    binding.anunciosRV.adapter = adaptador
+
+                    val contadorAnuncios = "${anunciosArrayList.size}"
+                    binding.TvNumAnuncios.text = contadorAnuncios
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
+    }
     private fun cargarInfoVendedor()
     {
         val ref = Constantes.obtenerReferenciaUsuariosDB()
