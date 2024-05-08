@@ -90,6 +90,8 @@
     <string name="Tv_Descripcion_Detalle">Descripción del anuncio</string>
     <string name="Txt_Direccion">Dirección</string>
     <string name="Txt_Descripcion_Vendedor">Descripción del vendedor</string>
+    <string name="Txt_Estado">Estado</string>
+    <string name="Tv_Estado">Disponible</string>
 
     <!-- Opciones del detalle anuncio -->
     <string name="Btn_mapa">Map</string>

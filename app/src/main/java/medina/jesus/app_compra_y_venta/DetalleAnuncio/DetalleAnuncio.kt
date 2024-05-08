@@ -131,7 +131,7 @@ class DetalleAnuncio : AppCompatActivity() {
                 intent.putExtra("idAnuncio", idAnuncio)
                 startActivity(intent)
             }else if(itemId == 1){
-
+                marcarAnuncioVendido()
             }
 
             return@setOnMenuItemClickListener true
@@ -154,6 +154,7 @@ class DetalleAnuncio : AppCompatActivity() {
                         val condicion = modeloAnuncio.condicion
                         val categoria = modeloAnuncio.categoria
                         val precio = modeloAnuncio.precio
+                        val estado = modeloAnuncio.estado
                         anuncioLatitud = modeloAnuncio.latitud
                         anuncioLongitud = modeloAnuncio.longitud
                         val tiempo = modeloAnuncio.tiempo
@@ -185,6 +186,7 @@ class DetalleAnuncio : AppCompatActivity() {
                         binding.TvCondicion.text = condicion
                         binding.TvCategoria.text = categoria
                         binding.TvPrecio.text = precio
+                        binding.TvEstado.text = estado
                         binding.TvFecha.text = formatoFecha
 
                         cargarInfoVendedor()
@@ -199,6 +201,23 @@ class DetalleAnuncio : AppCompatActivity() {
                     println(error.message)
                 }
             })
+    }
+
+    private fun marcarAnuncioVendido()
+    {
+        val hashMap = HashMap<String, Any>()
+        hashMap["estado"] = "${Constantes.ANUNCIO_VENDIDO}"
+
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.child(idAnuncio)
+            .updateChildren(hashMap)
+            .addOnSuccessListener {
+                Constantes.toastConMensaje(this, "Anuncio marcado como vendido")
+            }
+            .addOnFailureListener { e->
+                Constantes.toastConMensaje(this, "Error al marcar como vendido")
+                println(e.message)
+            }
     }
 
     private fun cargarInfoVendedor() {
