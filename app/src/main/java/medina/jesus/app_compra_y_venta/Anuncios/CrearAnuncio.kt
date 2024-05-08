@@ -118,7 +118,7 @@ class CrearAnuncio : AppCompatActivity() {
                     refImagenes.addListenerForSingleValueEvent(object : ValueEventListener{
                         override fun onDataChange(snapshot: DataSnapshot) {
                             for (ds in snapshot.children){
-                                val id = "${snapshot.child("id").value}"
+                                val id = "${ds.child("id").value}"
                                 val imagenUrl = "${ds.child("imagenUrl").value}"
 
                                 val imagenSeleccionada = ImagenSeleccionada(id, null, imagenUrl, true)

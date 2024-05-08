@@ -71,8 +71,7 @@ class AdaptadorImagenSeleccionada(
         val idImagen = modelo.id
 
         val ref = Constantes.obtenerReferenciaAnunciosDB()
-        ref.child(idAnuncio).child("Imagenes")
-            .child(idImagen)
+        ref.child(idAnuncio).child("Imagenes").child(idImagen)
             .removeValue()
             .addOnSuccessListener {
                 try{
@@ -80,7 +79,7 @@ class AdaptadorImagenSeleccionada(
                     eliminarImagenStorage(modelo)
                     notifyItemRemoved(position)
                 }catch (e : Exception){
-
+                    println(e.message)
                 }
             }
             .addOnFailureListener { e->
