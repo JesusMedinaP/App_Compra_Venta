@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -191,6 +192,11 @@ class DetalleAnuncio : AppCompatActivity() {
                         binding.TvEstado.text = estado
                         binding.TvFecha.text = formatoFecha
 
+                        if(estado.equals("Disponible")){
+                            binding.TvEstado.setTextColor(Color.BLUE)
+                        }else{
+                            binding.TvEstado.setTextColor(Color.RED)
+                        }
                         cargarInfoVendedor()
 
                     }catch (e : Exception){
