@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSeleccionada
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.MainActivity
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSeleccionada
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.SeleccionarUbicacion
@@ -105,7 +106,9 @@ class CrearAnuncio : AppCompatActivity() {
 
                     binding.EtMarca.setText(marca)
                     binding.Categoria.setText(categoria)
+                    binding.Categoria.isEnabled = false
                     binding.Condicion.setText(condicion)
+                    binding.Condicion.isEnabled = false
                     binding.Ubicacion.setText(direccion)
                     binding.EtPrecio.setText(precio)
                     binding.EtTitulo.setText(titulo)
@@ -121,17 +124,13 @@ class CrearAnuncio : AppCompatActivity() {
                                 val imagenSeleccionada = ImagenSeleccionada(id, null, imagenUrl, true)
                                 imagenSelecArrayList.add(imagenSeleccionada)
                             }
-
                             cargarImagenes()
                         }
-
                         override fun onCancelled(error: DatabaseError) {
                             println(error.message)
                         }
                     })
-
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     println(error.message)
                 }
@@ -187,14 +186,16 @@ class CrearAnuncio : AppCompatActivity() {
         {
             binding.EtDescripcion.error = "Ingrese una descripción"
             binding.EtDescripcion.requestFocus()
-        }else if(imagenUri == null)
-        {
-            Constantes.toastConMensaje(this, "Agregar al menos una imagen")
         }else{
             if(edicion){
                 actualizarAnuncio()
             }else{
-                agregarAnuncio()
+                if(imagenUri == null)
+                {
+                    Constantes.toastConMensaje(this, "Agregar al menos una imagen")
+                }else{
+                    agregarAnuncio()
+                }
             }
         }
     }
@@ -218,6 +219,7 @@ class CrearAnuncio : AppCompatActivity() {
         ref.child(idAnuncioEditado)
             .updateChildren(hashMap)
             .addOnSuccessListener {
+                progressDialog.dismiss()
                 cargarImagenesStorage(idAnuncioEditado)
             }
             .addOnFailureListener { e->
@@ -297,7 +299,7 @@ class CrearAnuncio : AppCompatActivity() {
                         if(uriTask.isSuccessful)
                         {
                             val hasMap = HashMap<String, Any>()
-                            hasMap["id"] = "${modeloImagenSel.imagenUri}"
+                            hasMap["id"] = "${modeloImagenSel.id}"
                             hasMap["imagenUrl"] = "${urlImgCargada}"
 
                             val ref = Constantes.obtenerReferenciaAnunciosDB()
@@ -305,10 +307,19 @@ class CrearAnuncio : AppCompatActivity() {
                                 .child(nombreImagen)
                                 .updateChildren(hasMap)
                         }
-                        progressDialog.dismiss()
-                        onBackPressedDispatcher.onBackPressed()
-                        Constantes.toastConMensaje(this, "Se publicó su anuncio")
-                        limpiarCampos()
+
+                        if(edicion)
+                        {
+                            progressDialog.dismiss()
+                            val intent = Intent(this@CrearAnuncio, MainActivity::class.java)
+                            startActivity(intent)
+                            Constantes.toastConMensaje(this, "Se actualizó la información correctamente")
+                            finishAffinity()
+                        }else{
+                            progressDialog.dismiss()
+                            Constantes.toastConMensaje(this, "Se publicó su anuncio")
+                            limpiarCampos()
+                        }
                     }
                     .addOnFailureListener { e->
                         Constantes.toastConMensaje(this, "${e.message}")
@@ -441,7 +452,7 @@ class CrearAnuncio : AppCompatActivity() {
         }
 
     private fun cargarImagenes() {
-        adaptadorImagenSel = AdaptadorImagenSeleccionada(this, imagenSelecArrayList)
+        adaptadorImagenSel = AdaptadorImagenSeleccionada(this, imagenSelecArrayList, idAnuncioEditado)
         binding.RVImagenes.adapter = adaptadorImagenSel
     }
 }

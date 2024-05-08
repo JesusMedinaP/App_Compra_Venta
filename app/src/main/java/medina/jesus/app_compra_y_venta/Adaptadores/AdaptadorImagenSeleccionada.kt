@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
+import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSeleccionada
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ItemImagenesSeleccionadasBinding
 
 class AdaptadorImagenSeleccionada(
     private val context : Context,
-    private val imagenesSeleccionadasArrayList : ArrayList<ImagenSeleccionada>
+    private val imagenesSeleccionadasArrayList : ArrayList<ImagenSeleccionada>,
+    private val idAnuncio : String
 ): Adapter<AdaptadorImagenSeleccionada.HolderImagenSeleccionada>() {
     private lateinit var binding : ItemImagenesSeleccionadasBinding
 
@@ -55,9 +58,47 @@ class AdaptadorImagenSeleccionada(
         }
 
         holder.boton_cerrar.setOnClickListener {
-            imagenesSeleccionadasArrayList.remove(modelo)
-            notifyDataSetChanged()
+            if(modelo.internetOrigin){
+                eliminarImagenFirebasse(modelo, holder, position)
+            }else{
+                imagenesSeleccionadasArrayList.remove(modelo)
+                notifyDataSetChanged()
+            }
         }
+    }
+
+    private fun eliminarImagenFirebasse(modelo: ImagenSeleccionada, holder: AdaptadorImagenSeleccionada.HolderImagenSeleccionada, position: Int) {
+        val idImagen = modelo.id
+
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.child(idAnuncio).child("Imagenes")
+            .child(idImagen)
+            .removeValue()
+            .addOnSuccessListener {
+                try{
+                    imagenesSeleccionadasArrayList.remove(modelo)
+                    eliminarImagenStorage(modelo)
+                    notifyItemRemoved(position)
+                }catch (e : Exception){
+
+                }
+            }
+            .addOnFailureListener { e->
+                Constantes.toastConMensaje(context, "Ha habido un error al borrar la imagen")
+                println(e.message)
+            }
+    }
+
+    private fun eliminarImagenStorage(modelo: ImagenSeleccionada) {
+        val rutaImagen = "Anuncios/"+modelo.id
+        val ref = FirebaseStorage.getInstance().getReference(rutaImagen)
+        ref.delete()
+            .addOnSuccessListener {
+                Constantes.toastConMensaje(context, "La imagen ha sido eliminada")
+            }
+            .addOnFailureListener { e->
+                Constantes.toastConMensaje(context, "Ha habido un error al borrar la imagen")
+                println(e.message) }
     }
 
     inner class HolderImagenSeleccionada(itemView: View) : ViewHolder(itemView)
