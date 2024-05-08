@@ -14,7 +14,10 @@ import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSeleccionada
 import medina.jesus.app_compra_y_venta.Constantes
@@ -33,6 +36,9 @@ class CrearAnuncio : AppCompatActivity() {
 
     private lateinit var imagenSelecArrayList : ArrayList<ImagenSeleccionada>
     private lateinit var adaptadorImagenSel : AdaptadorImagenSeleccionada
+
+    private var edicion = false
+    private var idAnuncioEditado = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,6 +58,18 @@ class CrearAnuncio : AppCompatActivity() {
         val adaptadorCondiciones = ArrayAdapter(this, R.layout.item_condicion, Constantes.condiciones)
         binding.Condicion.setAdapter(adaptadorCondiciones)
 
+        edicion = intent.getBooleanExtra("Edicion", false)
+
+        if(edicion){
+            //Llegamos de la actividad detalle anuncio
+            idAnuncioEditado = intent.getStringExtra("idAnuncio") ?: ""
+            cargarDetalles()
+            binding.BtnCrearAnuncio.text = "Actualizar anuncio"
+        }else{
+            //LLegamos desde el mainActivity
+            binding.BtnCrearAnuncio.text = "Crear anuncio"
+        }
+
         imagenSelecArrayList = ArrayList()
         cargarImagenes()
 
@@ -67,6 +85,57 @@ class CrearAnuncio : AppCompatActivity() {
         binding.BtnCrearAnuncio.setOnClickListener {
             validarDatos()
         }
+    }
+
+    private fun cargarDetalles() {
+        val ref = Constantes.obtenerReferenciaAnunciosDB()
+        ref.child(idAnuncioEditado)
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //Obtenemos al información del anuncio
+                    val marca = "${snapshot.child("marca").value}"
+                    val categoria = "${snapshot.child("categoria").value}"
+                    val condicion = "${snapshot.child("condicion").value}"
+                    val direccion = "${snapshot.child("direccion").value}"
+                    val precio = "${snapshot.child("precio").value}"
+                    val titulo = "${snapshot.child("titulo").value}"
+                    val descripcion = "${snapshot.child("descripcion").value}"
+                    latitud = snapshot.child("latitud").value as Double
+                    longitud = snapshot.child("longitud").value as Double
+
+                    binding.EtMarca.setText(marca)
+                    binding.Categoria.setText(categoria)
+                    binding.Condicion.setText(condicion)
+                    binding.Ubicacion.setText(direccion)
+                    binding.EtPrecio.setText(precio)
+                    binding.EtTitulo.setText(titulo)
+                    binding.EtDescripcion.setText(descripcion)
+
+                    val refImagenes = snapshot.child("Imagenes").ref
+                    refImagenes.addListenerForSingleValueEvent(object : ValueEventListener{
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            for (ds in snapshot.children){
+                                val id = "${snapshot.child("id").value}"
+                                val imagenUrl = "${ds.child("imagenUrl").value}"
+
+                                val imagenSeleccionada = ImagenSeleccionada(id, null, imagenUrl, true)
+                                imagenSelecArrayList.add(imagenSeleccionada)
+                            }
+
+                            cargarImagenes()
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                            println(error.message)
+                        }
+                    })
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
     }
 
     //Campos a validar dentro de la creación del anuncio

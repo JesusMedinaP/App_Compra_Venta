@@ -57,7 +57,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.FAB.setOnClickListener {
-            startActivity(Intent(this, CrearAnuncio::class.java))
+            val intent = Intent(this, CrearAnuncio::class.java)
+            intent.putExtra("Edicion", false)
+            startActivity(intent)
         }
     }
 

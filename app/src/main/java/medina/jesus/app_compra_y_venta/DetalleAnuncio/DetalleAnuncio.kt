@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,6 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSlider
+import medina.jesus.app_compra_y_venta.Anuncios.CrearAnuncio
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.MainActivity
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
@@ -61,6 +64,10 @@ class DetalleAnuncio : AppCompatActivity() {
             }
         }
 
+        binding.IbEditar.setOnClickListener {
+            opcionesDialog()
+        }
+
         binding.IbEliminar.setOnClickListener {
             val alertDialog = MaterialAlertDialogBuilder(this)
             alertDialog.setTitle("Eliminar Anuncio")
@@ -104,6 +111,30 @@ class DetalleAnuncio : AppCompatActivity() {
             }else{
                 permisoSMS.launch(android.Manifest.permission.SEND_SMS)
             }
+        }
+    }
+
+    private fun opcionesDialog() {
+        val popupMenu = PopupMenu(this, binding.IbEditar)
+
+        popupMenu.menu.add(Menu.NONE, 0,0, "Editar")
+        popupMenu.menu.add(Menu.NONE, 1,1, "Marcar como vendido")
+
+        popupMenu.show()
+
+        popupMenu.setOnMenuItemClickListener { item->
+            val itemId = item.itemId
+
+            if(itemId == 0){
+                val intent = Intent(this, CrearAnuncio::class.java)
+                intent.putExtra("Edicion", true)
+                intent.putExtra("idAnuncio", idAnuncio)
+                startActivity(intent)
+            }else if(itemId == 1){
+
+            }
+
+            return@setOnMenuItemClickListener true
         }
     }
 
