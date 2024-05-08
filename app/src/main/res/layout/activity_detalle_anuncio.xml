@@ -101,12 +101,12 @@
             <TextView
                 android:id="@+id/Tv_Condicion"
                 android:layout_below="@id/Imagen_SliderVP"
-                android:layout_centerInParent="true"
+                android:textAlignment="center"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:text="@string/Tv_Condicion"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <!-- Fecha de publicación -->
@@ -123,7 +123,6 @@
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginTop="13dp"
-                android:layout_centerInParent="true"
                 android:text="@string/Txt_Detalle_Info"
                 android:layout_below="@id/Tv_Fecha"
                 android:layout_width="wrap_content"
@@ -242,7 +241,7 @@
                 android:layout_height="wrap_content"/>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/perfilVendeor"
+                android:id="@+id/perfilVendedor"
                 android:layout_below="@id/Txt_Descripcion_Vendedor"
                 android:backgroundTint="#F2F4F4"
                 app:cardCornerRadius="10dp"
@@ -255,7 +254,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <!-- Imagen de perfil del vendeor -->
+                    <!-- Imagen de perfil del vendedor -->
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/img_perfil"
                         android:layout_width="40dp"
@@ -292,72 +291,83 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
+                    <ImageView
+                        android:id="@+id/Iv_info_vendedor"
+                        android:layout_alignParentEnd="true"
+                        android:padding="10dp"
+                        android:src="@drawable/informacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
                 </RelativeLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Opciones -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_below="@id/perfilVendedor"
+                android:id="@+id/Opciones_LL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+                <!-- Visualizar el mapa -->
+                <com.google.android.material.button.MaterialButton
+                    app:icon="@drawable/ic_op_ubicacion"
+                    app:iconGravity="top"
+                    android:textAllCaps="true"
+                    android:id="@+id/Btn_mapa"
+                    android:text="@string/Btn_mapa"
+                    android:layout_marginEnd="2dp"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Llamadas telefónicas -->
+                <com.google.android.material.button.MaterialButton
+                    app:icon="@drawable/ic_op_llamar"
+                    app:iconGravity="top"
+                    android:textAllCaps="true"
+                    android:id="@+id/Btn_llamar"
+                    android:text="@string/Btn_llamar"
+                    android:layout_marginEnd="2dp"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Envío de SMS -->
+                <com.google.android.material.button.MaterialButton
+                    app:icon="@drawable/ic_op_sms"
+                    app:iconGravity="top"
+                    android:textAllCaps="true"
+                    android:id="@+id/Btn_SMS"
+                    android:text="@string/Btn_SMS"
+                    android:layout_marginEnd="2dp"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Chat -->
+                <com.google.android.material.button.MaterialButton
+                    app:icon="@drawable/ic_op_chat"
+                    app:iconGravity="top"
+                    android:textAllCaps="true"
+                    android:id="@+id/Btn_Chat"
+                    android:text="@string/Btn_Chat"
+                    android:layout_marginEnd="2dp"
+                    android:textSize="11sp"
+                    app:cornerRadius="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
         </RelativeLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/Opciones_LL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:padding="20dp">
-
-        <!-- Visualizar el mapa -->
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_op_ubicacion"
-            app:iconGravity="top"
-            android:textAllCaps="true"
-            android:id="@+id/Btn_mapa"
-            android:text="@string/Btn_mapa"
-            android:layout_marginEnd="2dp"
-            android:textSize="11sp"
-            app:cornerRadius="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- Llamadas telefónicas -->
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_op_llamar"
-            app:iconGravity="top"
-            android:textAllCaps="true"
-            android:id="@+id/Btn_llamar"
-            android:text="@string/Btn_llamar"
-            android:layout_marginEnd="2dp"
-            android:textSize="11sp"
-            app:cornerRadius="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- Envío de SMS -->
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_op_sms"
-            app:iconGravity="top"
-            android:textAllCaps="true"
-            android:id="@+id/Btn_SMS"
-            android:text="@string/Btn_SMS"
-            android:layout_marginEnd="2dp"
-            android:textSize="11sp"
-            app:cornerRadius="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- Chat -->
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_op_chat"
-            app:iconGravity="top"
-            android:textAllCaps="true"
-            android:id="@+id/Btn_Chat"
-            android:text="@string/Btn_Chat"
-            android:layout_marginEnd="2dp"
-            android:textSize="11sp"
-            app:cornerRadius="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>

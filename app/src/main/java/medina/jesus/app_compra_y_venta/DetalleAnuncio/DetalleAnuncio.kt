@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSlider
 import medina.jesus.app_compra_y_venta.Anuncios.CrearAnuncio
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.DetalleVendedor.DetalleVendedor
 import medina.jesus.app_compra_y_venta.MainActivity
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSlider
@@ -115,6 +116,12 @@ class DetalleAnuncio : AppCompatActivity() {
                 permisoSMS.launch(android.Manifest.permission.SEND_SMS)
             }
         }
+
+        binding.IvInfoVendedor.setOnClickListener {
+            val intent = Intent(this, DetalleVendedor::class.java)
+            intent.putExtra("uidVendedor", uidVendedor)
+            startActivity(intent)
+        }
     }
 
     private fun opcionesDialog() {
@@ -173,6 +180,9 @@ class DetalleAnuncio : AppCompatActivity() {
                             binding.BtnLlamar.visibility = View.GONE
                             binding.BtnSMS.visibility = View.GONE
                             binding.BtnChat.visibility = View.GONE
+
+                            binding.TxtDescripcionVendedor.visibility = View.GONE
+                            binding.perfilVendedor.visibility = View.GONE
                         }else{
                             binding.IbEditar.visibility = View.GONE
                             binding.IbEliminar.visibility = View.GONE
@@ -181,6 +191,9 @@ class DetalleAnuncio : AppCompatActivity() {
                             binding.BtnLlamar.visibility = View.VISIBLE
                             binding.BtnSMS.visibility = View.VISIBLE
                             binding.BtnChat.visibility = View.VISIBLE
+
+                            binding.TxtDescripcionVendedor.visibility = View.VISIBLE
+                            binding.perfilVendedor.visibility = View.VISIBLE
                         }
 
                         binding.TvTitulo.text = titulo
