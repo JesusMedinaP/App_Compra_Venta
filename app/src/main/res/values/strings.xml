@@ -108,8 +108,12 @@
 
     <!-- Cuadro de diálogo marcar como vendido -->
     <string name="Txt_Marcar_Vendido">¿Estás seguro de querer marcar como vendido el producto?</string>
-    
+
     <string name="Txt_Perfil_Vendedor">Perfil del Vendedor</string>
     <string name="Txt_Anuncios">Anuncios publicados:</string>
     <string name="Tv_Num_Anuncios">0</string>
+
+    <!--Comentarios -->
+    <string name="Txt_Comentarios">Comentarios</string>
+    <string name="Txt_Agregar">Agregar un comentario</string>
 </resources>
