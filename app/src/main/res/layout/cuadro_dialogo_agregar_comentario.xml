@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:padding="5dp"
+        android:textStyle="bold"
+        android:text="@string/Txt_Agregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        android:id="@+id/Ib_Cerrar"
+        android:src="@drawable/ic_cerrar_dialogo"
+        android:layout_alignParentEnd="true"
+        android:padding="5dp"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TIL_Comentario"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/Ib_Cerrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/Et_Agregar_Comentario"
+            android:hint="@string/Et_Agregar_Comentario"
+            android:inputType="textMultiLine|textCapSentences"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Btn_Comentar"
+        android:text="@string/Btn_Comentar"
+        android:layout_marginTop="15sp"
+        android:textAllCaps="true"
+        android:layout_below="@id/TIL_Comentario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

@@ -116,4 +116,6 @@
     <!--Comentarios -->
     <string name="Txt_Comentarios">Comentarios</string>
     <string name="Txt_Agregar">Agregar un comentario</string>
+    <string name="Et_Agregar_Comentario">Escriba un comentario</string>
+    <string name="Btn_Comentar">Comentar</string>
 </resources>

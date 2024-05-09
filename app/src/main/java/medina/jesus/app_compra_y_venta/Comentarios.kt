@@ -1,8 +1,11 @@
 package medina.jesus.app_compra_y_venta
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import medina.jesus.app_compra_y_venta.databinding.ActivityComentariosBinding
+import medina.jesus.app_compra_y_venta.databinding.CuadroDialogoAgregarComentarioBinding
 
 class Comentarios : AppCompatActivity() {
 
@@ -17,7 +20,17 @@ class Comentarios : AppCompatActivity() {
         }
 
         binding.IbAgregarComentario.setOnClickListener {
-            Constantes.toastConMensaje(this, "Agregar comentario")
+            dialogComentar()
         }
+    }
+
+    private fun dialogComentar() {
+        val agregarComentario = CuadroDialogoAgregarComentarioBinding.inflate(LayoutInflater.from(this))
+
+        val builder = AlertDialog.Builder(this)
+        builder.setView(agregarComentario.root)
+
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 }
