@@ -33,7 +33,9 @@ class DetalleVendedor : AppCompatActivity() {
         }
 
         binding.IvComentarios.setOnClickListener {
-            startActivity(Intent(this, Comentarios::class.java))
+            val intent = Intent(this, Comentarios::class.java)
+            intent.putExtra("uidVendedor", uidVendedor)
+            startActivity(intent)
         }
     }
 

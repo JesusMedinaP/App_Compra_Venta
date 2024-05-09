@@ -114,6 +114,10 @@ object Constantes {
         return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Anuncios")
     }
 
+    fun obtenerReferenciaComentariosDB() : DatabaseReference{
+        return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Comentarios")
+    }
+
     fun mapaIntent(context: Context, latitud : Double, longitud : Double)
     {
         val googleMapaIntentUri = Uri.parse("http://maps.google.com/maps?daddr=$latitud,$longitud")
