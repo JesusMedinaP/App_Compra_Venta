@@ -6,6 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context=".Comentarios">
 
     <RelativeLayout
@@ -60,6 +61,15 @@
             android:src="@drawable/comentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Rv_Comentarios"
+            android:layout_marginTop="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_below="@id/Ib_agregar_comentario"
+            tools:listitem="@layout/item_comentario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 

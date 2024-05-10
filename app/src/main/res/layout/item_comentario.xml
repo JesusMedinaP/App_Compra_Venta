@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="1dp"
+    app:cardElevation="0dp"
+    app:contentPadding="8dp"
+    app:cardCornerRadius="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Imagen de perfil -->
+        <ImageView
+            android:id="@+id/Iv_Imagen_Perfil"
+            android:scaleType="centerCrop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/img_perfil"/>
+
+        <!-- Nombre del autor -->
+        <TextView
+            android:id="@+id/Tv_Nombre_Comentarios"
+            android:text="@string/Tv_Nombre_Comentarios"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/Iv_Imagen_Perfil"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Fecha de publicación -->
+        <TextView
+            android:id="@+id/Tv_Fecha_Comentario"
+            android:text="@string/Tv_Fecha_Comentario"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Contenido del comentario -->
+        <TextView
+            android:id="@+id/Tv_Comentario"
+            android:text="@string/Tv_Comentario"
+            android:textSize="13sp"
+            android:layout_marginStart="5dp"
+            android:layout_below="@id/Tv_Nombre_Comentarios"
+            android:layout_toEndOf="@id/Iv_Imagen_Perfil"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

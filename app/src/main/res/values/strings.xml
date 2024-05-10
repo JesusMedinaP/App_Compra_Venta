@@ -118,4 +118,7 @@
     <string name="Txt_Agregar">Agregar un comentario</string>
     <string name="Et_Agregar_Comentario">Escriba un comentario</string>
     <string name="Btn_Comentar">Comentar</string>
+    <string name="Tv_Nombre_Comentarios">Nombre completo</string>
+    <string name="Tv_Fecha_Comentario">dd/MM/yyyy</string>
+    <string name="Tv_Comentario">Comentario del usuario</string>
 </resources>
