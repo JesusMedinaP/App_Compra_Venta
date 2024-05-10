@@ -2,6 +2,7 @@ package medina.jesus.app_compra_y_venta.Adaptadores
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,6 +72,15 @@ class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Fi
             val intent = Intent(context, DetalleAnuncio::class.java)
             intent.putExtra("idAnuncio", modeloAnuncio.id)
             context.startActivity(intent)
+        }
+
+        if(condicion.equals("Nuevo")){
+            holder.Tv_condicion.setTextColor(Color.parseColor("#48C9B0"))
+        }else if(condicion.equals("Usado"))
+        {
+            holder.Tv_condicion.setTextColor(Color.parseColor("#5DADE2"))
+        }else if(condicion.equals("Renovado")){
+            holder.Tv_condicion.setTextColor(Color.parseColor("#A569BD"))
         }
 
         holder.Ib_fav.setOnClickListener {
