@@ -46,7 +46,6 @@
             android:id="@+id/Tv_Comentario"
             android:text="@string/Tv_Comentario"
             android:textSize="13sp"
-            android:maxLines="2"
             android:layout_marginStart="5dp"
             android:layout_below="@id/Tv_Nombre_Comentarios"
             android:layout_toEndOf="@id/Iv_Imagen_Perfil"
