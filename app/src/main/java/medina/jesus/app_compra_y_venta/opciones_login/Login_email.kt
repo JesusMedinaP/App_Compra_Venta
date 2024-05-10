@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.MainActivity
+import medina.jesus.app_compra_y_venta.RecuperarPassword
 import medina.jesus.app_compra_y_venta.Registro_email
 import medina.jesus.app_compra_y_venta.databinding.ActivityLoginEmailBinding
 
@@ -33,6 +34,10 @@ class Login_email : AppCompatActivity() {
 
         binding.BtnIngresar.setOnClickListener {
             validarInfo()
+        }
+
+        binding.TvRecuperar.setOnClickListener {
+            startActivity(Intent(this@Login_email, RecuperarPassword::class.java))
         }
     }
 
