@@ -44,6 +44,7 @@
     <string name="Txt_Opciones">Opciones</string>
     <string name="Btn_Editar_Perfil">Editar Perfil</string>
     <string name="Btn_Cerrar_Sesion">Cerrar Sesión</string>
+    <string name="Btn_Cambiar_Passsword">Cambiar contraseña</string>
 
     <!--Editar Perfil-->
     <string name="Txt_Editar_Perfil">Editar Perfil</string>
@@ -122,10 +123,19 @@
     <string name="Tv_Fecha_Comentario">dd/MM/yyyy</string>
     <string name="Tv_Comentario">Comentario del usuario</string>
     
+    <!-- Recuperación de contraseña -->
     <string name="Txt_Olvide_Password">He olvidado mi contraseña</string>
     <string name="Tv_Recuperar">Recuperar</string>
     <string name="Txt_Olvide_Mi_Password">Olvidé mi contraseña</string>
     <string name="Txt_Instrucciones">¿Olvidó su contraseña? Ingrese su correo electrónico registrado.
     Le enviaremos las instrucciones de recuperarión.</string>
     <string name="Btn_Enviar_Instrucciones">Enviar</string>
+
+    <!-- Actualizar contraseña -->
+    <string name="Txt_Cambiar_Password">Cambiar contraseña</string>
+    <string name="Txt_Instrucciones_Cambio_Password">Su nueva contraseña debe ser diferente a la actual</string>
+    <string name="Et_Password_Actual">Contraseña actual</string>
+    <string name="Et_Password_Nueva">Contraseña nueva</string>
+    <string name="Et_Password_Nueva_R">Repita la nueva contraseña</string>
+    <string name="Btn_Actualizar_Password">Actualizar contraseña</string>
 </resources>

@@ -7,13 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import medina.jesus.app_compra_y_venta.CambiarPassword
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.EditarPerfil
 import medina.jesus.app_compra_y_venta.OpcionesLogin
@@ -24,13 +23,13 @@ class FragmentCuenta : Fragment() {
 
     private lateinit var binding : FragmentCuentaBinding
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var mContext : Context
+    private lateinit var contexto : Context
 
 
     //Método para poder obtener el contexto ya que
     //estamos en un fragment y no lo tiene.
     override fun onAttach(context: Context) {
-         mContext = context
+         contexto = context
         super.onAttach(context)
     }
 
@@ -50,14 +49,18 @@ class FragmentCuenta : Fragment() {
         leerInfo()
 
         binding.BtnEditarPerfil.setOnClickListener {
-            startActivity(Intent(mContext, EditarPerfil::class.java))
+            startActivity(Intent(contexto, EditarPerfil::class.java))
         }
 
         //Método para poder cerrar sesión y volver a la vista de login.
         binding.BtnCerrarSesion.setOnClickListener {
             firebaseAuth.signOut()
-            startActivity(Intent(mContext, OpcionesLogin::class.java))
+            startActivity(Intent(contexto, OpcionesLogin::class.java))
             activity?.finishAffinity()
+        }
+
+        binding.BtnCambiarPasssword.setOnClickListener {
+            startActivity(Intent(contexto, CambiarPassword::class.java))
         }
     }
 
@@ -93,13 +96,13 @@ class FragmentCuenta : Fragment() {
 
                     //Obtención de la imagen con Glide
                     try {
-                        Glide.with(mContext)
+                        Glide.with(contexto)
                             .load(imagen)
                             .placeholder(R.drawable.img_perfil)
                             .into(binding.IvPerfil)
                     }catch (e : Exception)
                     {
-                        Constantes.toastConMensaje(mContext,
+                        Constantes.toastConMensaje(contexto,
                             "${e.message}")
                     }
 
