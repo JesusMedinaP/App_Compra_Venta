@@ -18,11 +18,11 @@ import medina.jesus.app_compra_y_venta.DetalleAnuncio.DetalleAnuncio
 import medina.jesus.app_compra_y_venta.Filtro.FiltrarAnuncio
 import medina.jesus.app_compra_y_venta.Modelo.Anuncio
 import medina.jesus.app_compra_y_venta.R
-import medina.jesus.app_compra_y_venta.databinding.ItemAnuncioBinding
+import medina.jesus.app_compra_y_venta.databinding.ItemAnuncioNuevaVersionBinding
 
 class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Filterable {
 
-    private lateinit var binding: ItemAnuncioBinding
+    private lateinit var binding: ItemAnuncioNuevaVersionBinding
 
     private var context : Context
     var anuncioArrayList : ArrayList<Anuncio>
@@ -38,7 +38,7 @@ class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Fi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderAnuncio {
-        binding = ItemAnuncioBinding.inflate(LayoutInflater.from(context), parent,false)
+        binding = ItemAnuncioNuevaVersionBinding.inflate(LayoutInflater.from(context), parent,false)
         return HolderAnuncio(binding.root)
     }
 
@@ -142,7 +142,7 @@ class AdaptadorAnuncio: RecyclerView.Adapter<AdaptadorAnuncio.HolderAnuncio>, Fi
         var Tv_condicion = binding.TvCondicion
         var Tv_precio = binding.TvPrecio
         var Tv_fecha = binding.TvFecha
-        var Ib_fav = binding.IbFavorito
+        var Ib_fav = binding.IbFav
     }
 
     override fun getFilter(): Filter {

@@ -87,8 +87,9 @@
         android:id="@+id/Rv_Anuncios"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_anuncio"
+        tools:listitem="@layout/item_anuncio_nueva_version"
         android:layout_marginTop="5dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
