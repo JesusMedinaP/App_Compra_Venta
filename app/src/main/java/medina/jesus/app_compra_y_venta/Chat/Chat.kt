@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ActivityChatBinding
@@ -58,6 +59,21 @@ class Chat : AppCompatActivity() {
 
         binding.AdjuntarFAB.setOnClickListener {
             seleccionarImagenDialog()
+        }
+
+        binding.EnviarFAB.setOnClickListener {
+            validarInfo()
+        }
+    }
+
+    private fun validarInfo() {
+        val mensaje = binding.EtMensajeChat.text.toString().trim()
+        val tiempo = Constantes.obtenerTiempoDis()
+
+        if(mensaje.isEmpty()){
+            Constantes.toastConMensaje(this, "No se puede enviar un mensaje vacío")
+        }else{
+            enviarMensaje(Constantes.MENSAJE_TIPO_TEXTO, mensaje, tiempo)
         }
     }
 
@@ -139,7 +155,7 @@ class Chat : AppCompatActivity() {
             if(resultado.resultCode == Activity.RESULT_OK){
                 val data = resultado.data
                 imagenUri = data!!.data
-                //Subir la imagen a Firebase
+                subirImagenStorage()
             }else{
                 Constantes.toastConMensaje(this, "Cancelado")
             }
@@ -170,7 +186,7 @@ class Chat : AppCompatActivity() {
     private val resultadoCamaraARL =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){resultado->
             if(resultado.resultCode == Activity.RESULT_OK){
-                //Subimos la imagen a Firebase
+                subirImagenStorage()
             }else{
                 Constantes.toastConMensaje(this, "Cancelado")
             }
@@ -188,4 +204,58 @@ class Chat : AppCompatActivity() {
                 Constantes.toastConMensaje(this, "El permiso de la cámara o almacenamiento ha sido denegado")
             }
         }
+
+    private fun subirImagenStorage()
+    {
+        progressDialog.setMessage("Subiendo imagen")
+        progressDialog.show()
+
+        val tiempo = Constantes.obtenerTiempoDis()
+        val nombreRutaImagen = "ImagenesChat/${tiempo}"
+
+        val storageref = FirebaseStorage.getInstance().getReference(nombreRutaImagen)
+        storageref.putFile(imagenUri!!)
+            .addOnSuccessListener {taskSnapShot->
+                val uriTask = taskSnapShot.storage.downloadUrl
+                while(!uriTask.isSuccessful);
+
+                val urlImagen = uriTask.result.toString()
+                if(uriTask.isSuccessful){
+                    enviarMensaje(Constantes.MENSAJE_TIPO_IMAGEN, urlImagen, tiempo)
+                }
+            }
+            .addOnFailureListener { e->
+                println(e.message)
+                Constantes.toastConMensaje(this, "No se pudo subir la imagen debido a un error")
+            }
+    }
+
+    private fun enviarMensaje(tipoMensaje: String, mensaje: String, tiempo: Long) {
+        progressDialog.setMessage("Enviando mensaje")
+        progressDialog.show()
+
+        val refChat = Constantes.obtenerReferenciaChatsDB()
+        val keyId = "${refChat.push().key}"
+        val hashMap = HashMap<String, Any>()
+
+        hashMap["idMensaje"] = "$keyId"
+        hashMap["tipoMensaje"] = "$tipoMensaje"
+        hashMap["mensaje"] = "$mensaje"
+        hashMap["emisorUid"] = "$uidUsuario"
+        hashMap["receptorUid"] = "$uidVendedor"
+        hashMap["tiempo"] = tiempo
+
+        refChat.child(rutaChat)
+            .child(keyId)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                binding.EtMensajeChat.setText("")
+            }
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                println(e.message)
+                Constantes.toastConMensaje(this, "No se pudo enviar el mensaje")
+            }
+    }
 }

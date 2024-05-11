@@ -14,6 +14,9 @@ import java.util.Locale
 
 object Constantes {
 
+    const val MENSAJE_TIPO_TEXTO = "TEXTO"
+    const val MENSAJE_TIPO_IMAGEN = "IMAGEN"
+
     const val ANUNCIO_DISPONIBLE = "Disponible"
     const val ANUNCIO_VENDIDO = "Vendido"
 
@@ -117,6 +120,10 @@ object Constantes {
 
     fun obtenerReferenciaComentariosDB() : DatabaseReference{
         return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Comentarios")
+    }
+
+    fun obtenerReferenciaChatsDB() : DatabaseReference{
+        return FirebaseDatabase.getInstance(REFERENCIADB).getReference("Chats")
     }
 
     fun mapaIntent(context: Context, latitud : Double, longitud : Double)
