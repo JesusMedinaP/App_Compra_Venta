@@ -12,6 +12,7 @@ import android.view.Menu
 import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -88,6 +89,11 @@ class Chat : AppCompatActivity() {
                     }
                     val adaptadorChat = AdaptadorChat(this@Chat, mensajes)
                     binding.RvChats.adapter = adaptadorChat
+
+                    binding.RvChats.setHasFixedSize(true)
+                    var linearLayoutManager = LinearLayoutManager(this@Chat)
+                    linearLayoutManager.stackFromEnd = true
+                    binding.RvChats.layoutManager = linearLayoutManager
                 }
 
                 override fun onCancelled(error: DatabaseError) {
