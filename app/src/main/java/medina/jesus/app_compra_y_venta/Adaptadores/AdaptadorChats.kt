@@ -5,29 +5,35 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import medina.jesus.app_compra_y_venta.Chat.BuscarChat
 import medina.jesus.app_compra_y_venta.Chat.Chat
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.Chats
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ItemChatsBinding
 
-class AdaptadorChats : RecyclerView.Adapter<AdaptadorChats.HolderChats> {
+class AdaptadorChats : RecyclerView.Adapter<AdaptadorChats.HolderChats>, Filterable {
 
     private var context : Context
-    private var chats : ArrayList<Chats>
+    var chats : ArrayList<Chats>
     private lateinit var binding : ItemChatsBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private var uidUsuario = ""
+    private var filtroLista : ArrayList<Chats>
+    private var filtro : BuscarChat?=null
 
     constructor(context: Context, chats: ArrayList<Chats>) {
         this.context = context
         this.chats = chats
+        this.filtroLista = chats
         firebaseAuth = FirebaseAuth.getInstance()
         uidUsuario = firebaseAuth.uid!!
     }
@@ -146,5 +152,12 @@ class AdaptadorChats : RecyclerView.Adapter<AdaptadorChats.HolderChats> {
         var Tv_nombres = binding.TvNombres
         var Tv_ultimo_mensaje = binding.TvUltimoMensaje
         var Tv_fecha = binding.TvFecha
+    }
+
+    override fun getFilter(): Filter {
+        if(filtro == null){
+            filtro = BuscarChat(this, filtroLista)
+        }
+        return filtro!!
     }
 }
