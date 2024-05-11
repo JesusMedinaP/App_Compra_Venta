@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.Arrays
 import java.util.Calendar
 import java.util.Locale
 
@@ -145,5 +146,17 @@ object Constantes {
         intent.setData(Uri.parse("smsto:$telef"))
         intent.putExtra("sms_body", "")
         context.startActivity(intent)
+    }
+
+    fun rutaChat (receptorUid : String, emisorUid : String) : String
+    {
+        val arrayUid = arrayOf(receptorUid, emisorUid)
+        Arrays.sort(arrayUid)
+        //Nuestro uid [emisor] = abcderf1234
+        //Uid del receptor [recpetor] = lkjguiop9876
+        //La ruta seria = abcderf1234_lkjguiop9876
+        //Y por tanto el almacenamiento del mensaje en la base de datos
+        // sería el mismo siempre puesto que los ordenamos
+        return "${arrayUid[0]}_${arrayUid[1]}"
     }
 }
