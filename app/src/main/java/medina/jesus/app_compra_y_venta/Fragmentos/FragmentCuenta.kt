@@ -1,5 +1,6 @@
 package medina.jesus.app_compra_y_venta.Fragmentos
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,6 +25,7 @@ class FragmentCuenta : Fragment() {
     private lateinit var binding : FragmentCuentaBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var contexto : Context
+    private lateinit var progressDialog: ProgressDialog
 
 
     //Método para poder obtener el contexto ya que
@@ -44,6 +46,10 @@ class FragmentCuenta : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressDialog = ProgressDialog(contexto)
+        progressDialog.setTitle("Espere por favor")
+        progressDialog.setCanceledOnTouchOutside(false)
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         leerInfo()
@@ -61,6 +67,10 @@ class FragmentCuenta : Fragment() {
 
         binding.BtnCambiarPasssword.setOnClickListener {
             startActivity(Intent(contexto, CambiarPassword::class.java))
+        }
+
+        binding.BtnVerificarCuenta.setOnClickListener {
+            verificarCuenta()
         }
     }
 
@@ -111,11 +121,14 @@ class FragmentCuenta : Fragment() {
                         val esVerificado = firebaseAuth.currentUser!!.isEmailVerified
                         if(esVerificado)
                         {
+                            binding.BtnVerificarCuenta.visibility = View.GONE
                             binding.TvEstadoCuenta.text = "Verificado"
                         }else{
+                            binding.BtnVerificarCuenta.visibility = View.VISIBLE
                             binding.TvEstadoCuenta.text = "No Verificado"
                         }
                     }else{
+                        binding.BtnVerificarCuenta.visibility = View.GONE
                         binding.TvEstadoCuenta.text = "Verificado"
                     }
                 }
@@ -125,4 +138,19 @@ class FragmentCuenta : Fragment() {
             })
     }
 
+    private fun verificarCuenta(){
+        progressDialog.setMessage("Enviando instrucciones de verificación a su email")
+        progressDialog.show()
+
+        firebaseAuth.currentUser!!.sendEmailVerification()
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Constantes.toastConMensaje(contexto, "Las instrucciones han sido enviadas a su correo")
+            }
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Constantes.toastConMensaje(contexto, "Ha habido un problema con la verificación")
+                println(e.message)
+            }
+    }
 }

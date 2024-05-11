@@ -166,7 +166,7 @@
             android:layout_below="@id/Txt_Opciones"
             android:textAllCaps="true"
             app:icon="@drawable/ic_editar"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"
             android:layout_centerInParent="true"/>
 
@@ -177,7 +177,18 @@
             android:layout_below="@id/Btn_Editar_Perfil"
             android:textAllCaps="true"
             app:icon="@drawable/ic_password"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
+            android:layout_height="@dimen/m_button_height"
+            android:layout_centerInParent="true"/>
+
+        <!--Verificar cuenta-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_Verificar_Cuenta"
+            android:text="@string/Btn_Verificar_Cuenta"
+            android:layout_below="@id/Btn_Cambiar_Passsword"
+            android:textAllCaps="true"
+            app:icon="@drawable/ic_verificar_cuenta"
+            android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"
             android:layout_centerInParent="true"/>
 
@@ -185,10 +196,10 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_Cerrar_Sesion"
             android:text="@string/Btn_Cerrar_Sesion"
-            android:layout_below="@id/Btn_Cambiar_Passsword"
+            android:layout_below="@id/Btn_Verificar_Cuenta"
             android:textAllCaps="true"
             app:icon="@drawable/ic_cerrar_sesion"
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"
             android:layout_centerInParent="true"/>
 

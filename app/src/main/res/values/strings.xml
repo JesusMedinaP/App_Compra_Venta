@@ -45,6 +45,7 @@
     <string name="Btn_Editar_Perfil">Editar Perfil</string>
     <string name="Btn_Cerrar_Sesion">Cerrar Sesión</string>
     <string name="Btn_Cambiar_Passsword">Cambiar contraseña</string>
+    <string name="Btn_Verificar_Cuenta">Verificar cuenta</string>
 
     <!--Editar Perfil-->
     <string name="Txt_Editar_Perfil">Editar Perfil</string>
