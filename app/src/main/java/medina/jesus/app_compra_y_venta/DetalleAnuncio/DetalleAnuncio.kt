@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorImagenSlider
 import medina.jesus.app_compra_y_venta.Anuncios.CrearAnuncio
+import medina.jesus.app_compra_y_venta.Chat.Chat
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.DetalleVendedor.DetalleVendedor
 import medina.jesus.app_compra_y_venta.MainActivity
@@ -115,6 +116,12 @@ class DetalleAnuncio : AppCompatActivity() {
             }else{
                 permisoSMS.launch(android.Manifest.permission.SEND_SMS)
             }
+        }
+
+        binding.BtnChat.setOnClickListener {
+            val intent = Intent(this, Chat::class.java)
+            intent.putExtra("uidVendedor", uidVendedor)
+            startActivity(intent)
         }
 
         binding.IvInfoVendedor.setOnClickListener {

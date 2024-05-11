@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Chat.Chat">
+
+    <RelativeLayout
+        android:id="@+id/ToolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m_toolbar_height">
+
+        <ImageButton
+            android:id="@+id/ic_regresar"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_regresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ToolbarIv"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/Txt_Nombre_Vendedor_Chat"
+            android:layout_marginEnd="7dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:id="@+id/Txt_Nombre_Vendedor_Chat"
+            android:text="@string/Txt_Nombre_Vendedor_Chat"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:background="#ccc"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Rv_Chats"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_below="@id/ToolbarRl"
+        tools:listitem="@layout/item_chat_izquierdo"
+        android:layout_above="@id/View2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/View2"
+        android:background="#ccc"
+        android:layout_above="@id/RL_Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <RelativeLayout
+        android:id="@+id/RL_Mensaje"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/Et_Mensaje_Chat"
+            android:hint="@string/Et_Mensaje_Chat"
+            android:padding="10dp"
+            android:inputType="textMultiLine|textCapSentences"
+            android:layout_toStartOf="@id/AdjuntarFAB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/AdjuntarFAB"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_imagen_chat"
+            android:layout_toStartOf="@id/EnviarFAB"
+            android:layout_marginEnd="7dp"
+            app:fabSize="mini"
+            android:elevation="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/EnviarFAB"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:fabSize="mini"
+            android:elevation="0dp"
+            android:src="@drawable/ic_enviar_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

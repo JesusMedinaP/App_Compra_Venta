@@ -123,7 +123,7 @@
     <string name="Tv_Nombre_Comentarios">Nombre completo</string>
     <string name="Tv_Fecha_Comentario">dd/MM/yyyy</string>
     <string name="Tv_Comentario">Comentario del usuario</string>
-    
+
     <!-- Recuperación de contraseña -->
     <string name="Txt_Olvide_Password">He olvidado mi contraseña</string>
     <string name="Tv_Recuperar">Recuperar</string>
@@ -139,4 +139,9 @@
     <string name="Et_Password_Nueva">Contraseña nueva</string>
     <string name="Et_Password_Nueva_R">Repita la nueva contraseña</string>
     <string name="Btn_Actualizar_Password">Actualizar contraseña</string>
+
+    <!-- Chat -->
+    <string name="Txt_Nombre_Vendedor_Chat">Nombre del vendedor</string>
+    <string name="Et_Mensaje_Chat">Escriba algo</string>
+    <string name="Tv_Tiempo_Mensaje">dd/MM/yyyy hh:mm</string>
 </resources>
