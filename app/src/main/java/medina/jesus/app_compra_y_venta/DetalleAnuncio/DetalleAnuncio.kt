@@ -207,7 +207,7 @@ class DetalleAnuncio : AppCompatActivity() {
                         binding.TvDescripcionDetalle.text = descripcion
                         binding.TvDireccion.text = direccion
                         binding.TvCondicion.text = condicion
-                        binding.TvCategoria.text = categoria
+                        binding.TvCategoriaDetalle.text = categoria
                         binding.TvPrecio.text = precio
                         binding.TvEstado.text = estado
                         binding.TvFecha.text = formatoFecha

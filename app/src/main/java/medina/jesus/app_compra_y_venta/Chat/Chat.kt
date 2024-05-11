@@ -16,9 +16,12 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorChat
 import medina.jesus.app_compra_y_venta.Constantes
+import medina.jesus.app_compra_y_venta.Modelo.Chat
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ActivityChatBinding
 
@@ -56,6 +59,7 @@ class Chat : AppCompatActivity() {
         }
 
         cargarInfoVendedor()
+        cargarMensajes()
 
         binding.AdjuntarFAB.setOnClickListener {
             seleccionarImagenDialog()
@@ -64,6 +68,33 @@ class Chat : AppCompatActivity() {
         binding.EnviarFAB.setOnClickListener {
             validarInfo()
         }
+    }
+
+    private fun cargarMensajes() {
+        val mensajes = ArrayList<Chat>()
+        val ref = Constantes.obtenerReferenciaChatsDB()
+        ref.child(rutaChat)
+            .addValueEventListener(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    mensajes.clear()
+                    for(ds : DataSnapshot in snapshot.children){
+                        try {
+                            val modeloChat = ds.getValue(Chat::class.java)
+                            mensajes.add(modeloChat!!)
+                        }catch (e : Exception){
+                            println(e.message)
+                            Constantes.toastConMensaje(this@Chat, "Ha habido un error al acceder a los mensajes")
+                        }
+                    }
+                    val adaptadorChat = AdaptadorChat(this@Chat, mensajes)
+                    binding.RvChats.adapter = adaptadorChat
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                    Constantes.toastConMensaje(this@Chat, "Ha habido un problema al acceder a la base de datos")
+                }
+            })
     }
 
     private fun validarInfo() {

@@ -70,6 +70,13 @@ object Constantes {
         return DateFormat.format("dd/MM/yyyy", calendario).toString()
     }
 
+    fun obtenerFechaHora(tiempo : Long) : String
+    {
+        val calendario = Calendar.getInstance(Locale.ENGLISH)
+        calendario.timeInMillis = tiempo
+        return DateFormat.format("dd/MM/yyyy hh:mm:a", calendario).toString()
+    }
+
     fun agregarAnuncioFavoritos(context: Context, idAnuncio: String)
     {
         val firebaseAuth = FirebaseAuth.getInstance()
