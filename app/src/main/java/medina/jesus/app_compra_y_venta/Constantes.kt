@@ -6,8 +6,11 @@ import android.net.Uri
 import android.text.format.DateFormat
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.Arrays
 import java.util.Calendar
 import java.util.Locale
@@ -175,5 +178,34 @@ object Constantes {
         //Y por tanto el almacenamiento del mensaje en la base de datos
         // sería el mismo siempre puesto que los ordenamos
         return "${arrayUid[0]}_${arrayUid[1]}"
+    }
+
+    fun incrementarVisitas(idAnuncio: String)
+    {
+        val ref = obtenerReferenciaAnunciosDB()
+        ref.child(idAnuncio)
+            .addListenerForSingleValueEvent(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    var visitasActuales = "${snapshot.child("visitas").value}"
+                    println(visitasActuales)
+                    if(visitasActuales == "" || visitasActuales == "null"){
+                        visitasActuales = "0"
+                    }
+                    println(visitasActuales)
+
+                    val nuevaVisita = visitasActuales.toLong()+1
+
+                    val hashMap = HashMap<String, Any>()
+                    hashMap["visitas"] = nuevaVisita
+
+                    val dbRef = obtenerReferenciaAnunciosDB()
+                    dbRef.child(idAnuncio)
+                        .updateChildren(hashMap)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    println(error.message)
+                }
+            })
     }
 }

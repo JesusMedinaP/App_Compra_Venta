@@ -269,6 +269,7 @@ class CrearAnuncio : AppCompatActivity() {
         hashMap["tiempo"] = tiempo
         hashMap["latitud"] = latitud
         hashMap["longitud"] = longitud
+        hashMap["visitas"] = 0
 
         ref.child(keyId!!)
             .setValue(hashMap)

@@ -53,6 +53,8 @@ class DetalleAnuncio : AppCompatActivity() {
 
         idAnuncio = intent.getStringExtra("idAnuncio").toString()
 
+        Constantes.incrementarVisitas(idAnuncio)
+
         comprobarFavorito()
         cargarInfo()
         cargarImagenesAnuncio()
@@ -172,6 +174,7 @@ class DetalleAnuncio : AppCompatActivity() {
                         val categoria = modeloAnuncio.categoria
                         val precio = modeloAnuncio.precio
                         val estado = modeloAnuncio.estado
+                        val visitas = modeloAnuncio.visitas
                         anuncioLatitud = modeloAnuncio.latitud
                         anuncioLongitud = modeloAnuncio.longitud
                         val tiempo = modeloAnuncio.tiempo
@@ -211,6 +214,7 @@ class DetalleAnuncio : AppCompatActivity() {
                         binding.TvPrecio.text = precio
                         binding.TvEstado.text = estado
                         binding.TvFecha.text = formatoFecha
+                        binding.TvVisitas.text = visitas.toString()
 
                         if(estado.equals("Disponible")){
                             binding.TvEstado.setTextColor(Color.BLUE)

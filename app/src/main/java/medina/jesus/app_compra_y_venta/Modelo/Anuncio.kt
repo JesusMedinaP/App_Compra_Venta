@@ -16,6 +16,7 @@ class Anuncio {
     var latitud = 0.0
     var longitud = 0.0
     var favorito = false
+    var visitas = 0
 
     constructor()
     constructor(
@@ -32,7 +33,8 @@ class Anuncio {
         tiempo: Long,
         latitud: Double,
         longitud: Double,
-        favorito: Boolean
+        favorito: Boolean,
+        visitas: Int
     ) {
         this.id = id
         this.uid = uid
@@ -48,6 +50,7 @@ class Anuncio {
         this.latitud = latitud
         this.longitud = longitud
         this.favorito = favorito
+        this.visitas = visitas
     }
 
 
