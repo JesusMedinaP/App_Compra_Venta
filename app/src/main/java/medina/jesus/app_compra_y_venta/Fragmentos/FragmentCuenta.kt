@@ -128,7 +128,7 @@ class FragmentCuenta : Fragment() {
 
                     val cod_tel = codTelefono + telefono
 
-                    if(tiempo == null)
+                    if(tiempo == "null")
                     {
                         tiempo = "0"
                     }

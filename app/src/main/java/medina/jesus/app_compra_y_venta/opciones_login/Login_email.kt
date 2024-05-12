@@ -79,7 +79,7 @@ class Login_email : AppCompatActivity() {
             .addOnFailureListener {e->
                 progressDialog.dismiss()
                 Constantes.toastConMensaje(this,
-                    "No se pudo iniciar sesión debido a un error")
+                    "El email o contraseña no son correctos.")
             }
     }
 }

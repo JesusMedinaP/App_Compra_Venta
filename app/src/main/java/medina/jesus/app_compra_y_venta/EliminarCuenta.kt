@@ -61,21 +61,29 @@ class EliminarCuenta : AppCompatActivity() {
                                 }
                                 Constantes.obtenerReferenciaComentariosDB().child(uidUsuario!!)
                                     .removeValue()
-                                Constantes.obtenerReferenciaUsuariosDB().child(uidUsuario!!)
-                                    .removeValue()
                                     .addOnSuccessListener {
-                                        progressDialog.dismiss()
-                                        irMainActivity()
+                                        Constantes.obtenerReferenciaUsuariosDB().child(uidUsuario!!)
+                                            .removeValue()
+                                            .addOnSuccessListener {
+                                                progressDialog.dismiss()
+                                                irMainActivity()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                progressDialog.dismiss()
+                                                Constantes.toastConMensaje(
+                                                    this@EliminarCuenta,
+                                                    "Ha habido un problema al eliminar el usuario"
+                                                )
+                                                println(e.message)
+                                                irMainActivity()
+                                            }
                                     }
-                                    .addOnFailureListener { e ->
+                                    .addOnFailureListener { e->
                                         progressDialog.dismiss()
-                                        Constantes.toastConMensaje(
-                                            this@EliminarCuenta,
-                                            "Ha habido un problema al eliminar el usuario"
-                                        )
                                         println(e.message)
                                         irMainActivity()
                                     }
+
                             }
 
                             override fun onCancelled(error: DatabaseError) {
