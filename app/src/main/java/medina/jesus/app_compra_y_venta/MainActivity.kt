@@ -1,8 +1,13 @@
 package medina.jesus.app_compra_y_venta
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
 import medina.jesus.app_compra_y_venta.Anuncios.CrearAnuncio
@@ -74,6 +79,7 @@ class MainActivity : AppCompatActivity() {
             finishAffinity()
         }else{
             agregarFcmToken()
+            solicitarPermisoNotificaion()
         }
     }
 
@@ -136,4 +142,19 @@ class MainActivity : AppCompatActivity() {
                 Constantes.toastConMensaje(this, "Ha habido un problema al generar el token")
             }
     }
+
+    private fun solicitarPermisoNotificaion()
+    {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_DENIED){
+                permisoNotificacion.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+    }
+
+    private val permisoNotificacion =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()){concesion->
+            //Aquí se concede el permiso
+        }
 }
