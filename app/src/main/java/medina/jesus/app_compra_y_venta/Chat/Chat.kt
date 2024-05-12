@@ -13,6 +13,9 @@ import android.widget.PopupMenu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -24,6 +27,7 @@ import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.Chat
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.ActivityChatBinding
+import org.json.JSONObject
 
 class Chat : AppCompatActivity() {
 
@@ -33,6 +37,10 @@ class Chat : AppCompatActivity() {
 
     private var uidVendedor = "" //Emisor
     private var uidUsuario = "" //Receptor
+
+    private var nombreUsuario = ""
+    private var tokenRecibido = ""
+
     private var rutaChat = ""
     private var imagenUri : Uri ?= null
 
@@ -68,6 +76,22 @@ class Chat : AppCompatActivity() {
         binding.EnviarFAB.setOnClickListener {
             validarInfo()
         }
+    }
+
+    private fun cargarMiInformacion()
+    {
+        val ref = Constantes.obtenerReferenciaUsuariosDB()
+        ref.child("${firebaseAuth.uid!!}")
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    nombreUsuario = "${snapshot.child("nombres").value}"
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Constantes.toastConMensaje(this@Chat, "Ha habido un error al cargar la información del usuario")
+                    println(error.message)
+                }
+            })
     }
 
     private fun cargarMensajes() {
@@ -122,6 +146,7 @@ class Chat : AppCompatActivity() {
                     try {
                         val nombre = "${snapshot.child("nombres").value}"
                         val imagen = "${snapshot.child("urlImagenPerfil").value}"
+                        tokenRecibido = "${snapshot.child("fcmToken").value}"
 
                         binding.TxtNombreVendedorChat.text = nombre
                         try {
@@ -287,11 +312,62 @@ class Chat : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 binding.EtMensajeChat.setText("")
+
+                if(tipoMensaje == Constantes.MENSAJE_TIPO_TEXTO){
+                    prepararNotificacion(mensaje)
+                }else{
+                    prepararNotificacion("Se ha enviado una imagen")
+                }
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
                 println(e.message)
                 Constantes.toastConMensaje(this, "No se pudo enviar el mensaje")
             }
+    }
+
+    private fun prepararNotificacion(mensaje : String)
+    {
+        val notificationJo = JSONObject()
+        val notificationDataJo = JSONObject()
+        val notificationNotificationJo = JSONObject()
+        try{
+            notificationDataJo.put("notificationType", "${Constantes.NOTIFICACION_DE_NUEVO_MENSAJE}")
+            notificationDataJo.put("senderUid", "${firebaseAuth.uid}")
+            notificationNotificationJo.put("title", "$nombreUsuario")
+            notificationNotificationJo.put("body", "$mensaje")
+            notificationNotificationJo.put("sound", "default")
+
+            notificationJo.put("to", "${tokenRecibido}")
+            notificationJo.put("notification", notificationNotificationJo)
+            notificationJo.put("data", notificationDataJo)
+        }catch (e : Exception){
+            println(e.message)
+        }
+
+        enviarNotificacion(notificationJo)
+    }
+
+    private fun enviarNotificacion(notificationJo: JSONObject) {
+        val jsonObjectRequest : JsonObjectRequest = object : JsonObjectRequest(
+            Method.POST,
+            "https://fcm.googleapis.com/fcm/send",
+            notificationJo,
+            Response.Listener {
+                //notificacion enviada
+            },
+            Response.ErrorListener { e->
+                //Fallo al enviar
+            }
+        ){
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "key=${Constantes.FCM_SERVER_KEY}"
+                return headers
+            }
+        }
+
+        Volley.newRequestQueue(this).add(jsonObjectRequest)
     }
 }

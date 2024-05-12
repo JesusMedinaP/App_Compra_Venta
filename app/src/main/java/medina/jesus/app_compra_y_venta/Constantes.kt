@@ -20,6 +20,12 @@ object Constantes {
     const val ANUNCIO_DISPONIBLE = "Disponible"
     const val ANUNCIO_VENDIDO = "Vendido"
 
+    private const val REFERENCIADB =
+        "https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app"
+
+    const val NOTIFICACION_DE_NUEVO_MENSAJE = "NOTIFICACION_DE_NUEVO_MENSAJE"
+    const val FCM_SERVER_KEY =
+        "AAAAmpwMD64:APA91bHrWIjXYWsNMnDT06FFpEXYVe7b_rMuN-QXGjmn1qwKvc0ZrNefS4w6j6PoKIDdi6FgZ9pvRFaiXV54uS4u0IMXCQ1hbJ8iy1asiAInUaxgPxL5_J90gYFB7U7cSM2h3bcdqesw"
 
     val categorias = arrayOf(
         "Todos",
@@ -106,9 +112,6 @@ object Constantes {
             }
             .addOnFailureListener { e-> toastConMensaje(context, "${e.message}") }
     }
-
-    private const val REFERENCIADB =
-        "https://app-compra-y-venta-de42d-default-rtdb.europe-west1.firebasedatabase.app"
 
     public fun toastConMensaje(context : Context, mensaje : String) {
         Toast.makeText(
