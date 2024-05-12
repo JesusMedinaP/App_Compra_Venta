@@ -91,6 +91,34 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
             }catch (e : Exception){
                 println(e.message)
             }
+
+            if(modeloChat.emisorUid.equals(firebaseAuth.uid)){
+                holder.itemView.setOnClickListener {
+                    val opciones = arrayOf<CharSequence>("Eliminar imagen", "Ver imagen completa", "Cancelar")
+                    val builder : AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                    builder.setTitle("¿Qué desea realizar?")
+                    builder.setItems(opciones, DialogInterface.OnClickListener{dialogIntercae, i ->
+                        if(i == 0){
+                            eliminarMensaje(position, holder, modeloChat)
+                        }else if(i == 1){
+                            //Visualizar imagen
+                        }
+                    })
+                    builder.show()
+                }
+            }else if(!modeloChat.emisorUid.equals(firebaseAuth)){
+                holder.itemView.setOnClickListener {
+                    val opciones = arrayOf<CharSequence>("Ver imagen completa", "Cancelar")
+                    val builder : AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                    builder.setTitle("¿Qué desea realizar?")
+                    builder.setItems(opciones, DialogInterface.OnClickListener{dialogIntercae, i ->
+                        if(i == 0){
+                            //Visualizar imagen
+                        }
+                    })
+                    builder.show()
+                }
+            }
         }
     }
 
