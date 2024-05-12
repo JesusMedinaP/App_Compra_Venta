@@ -58,8 +58,8 @@ class EliminarCuenta : AppCompatActivity() {
                             for(ds in snapshot.children){
                                 ds.ref.removeValue()
                             }
-                            val usuarioDb = Constantes.obtenerReferenciaUsuariosDB()
-                            usuarioDb.child(uidUsuario!!).removeValue()
+                            Constantes.obtenerReferenciaComentariosDB().child(uidUsuario!!).removeValue()
+                            Constantes.obtenerReferenciaUsuariosDB().child(uidUsuario!!).removeValue()
                                 .addOnSuccessListener {
                                     progressDialog.dismiss()
                                     irMainActivity()
