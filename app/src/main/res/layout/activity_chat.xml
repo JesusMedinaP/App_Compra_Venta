@@ -10,6 +10,7 @@
 
     <RelativeLayout
         android:id="@+id/ToolbarRl"
+        android:background="@color/color_personalizado"
         android:layout_width="match_parent"
         android:layout_height="@dimen/m_toolbar_height">
 
@@ -32,6 +33,7 @@
 
         <TextView
             android:id="@+id/Txt_Nombre_Vendedor_Chat"
+            android:textColor="@color/white"
             android:text="@string/Txt_Nombre_Vendedor_Chat"
             android:textStyle="bold"
             android:layout_centerInParent="true"
@@ -85,6 +87,8 @@
             android:layout_toStartOf="@id/EnviarFAB"
             android:layout_marginEnd="7dp"
             app:fabSize="mini"
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/color_personalizado"
             android:elevation="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -94,6 +98,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             app:fabSize="mini"
+            app:tint="@android:color/white"
+            android:backgroundTint="@color/color_personalizado"
             android:elevation="0dp"
             android:src="@drawable/ic_enviar_chat"
             android:layout_width="wrap_content"
