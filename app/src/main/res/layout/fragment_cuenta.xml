@@ -21,12 +21,12 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Iv_Perfil"
             android:layout_below="@id/Txt_Perfil"
             android:src="@drawable/img_perfil"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="18dp"
             android:scaleType="centerCrop"/>

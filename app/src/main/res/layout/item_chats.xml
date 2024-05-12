@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <!-- Imagen de perfil -->
-        <com.google.android.material.imageview.ShapeableImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Iv_Perfil"
             tools:src="@tools:sample/avatars"
             android:layout_marginEnd="10dp"

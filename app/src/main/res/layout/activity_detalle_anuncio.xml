@@ -255,7 +255,7 @@
                     android:layout_height="wrap_content">
 
                     <!-- Imagen de perfil del vendedor -->
-                    <com.google.android.material.imageview.ShapeableImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/img_perfil"
                         android:layout_width="40dp"
                         android:layout_height="40dp"

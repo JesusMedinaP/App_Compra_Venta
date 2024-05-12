@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <!-- Imagen de perfil -->
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/Iv_Imagen_Perfil"
             android:scaleType="centerCrop"
             android:layout_width="50dp"
@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/Tv_Nombre_Comentarios"
             android:text="@string/Tv_Nombre_Comentarios"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="7dp"
             android:layout_toEndOf="@id/Iv_Imagen_Perfil"
             android:textSize="17sp"
             android:textStyle="bold"
@@ -46,7 +46,7 @@
             android:id="@+id/Tv_Comentario"
             android:text="@string/Tv_Comentario"
             android:textSize="13sp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="7dp"
             android:layout_below="@id/Tv_Nombre_Comentarios"
             android:layout_toEndOf="@id/Iv_Imagen_Perfil"
             android:layout_marginTop="5dp"

@@ -7,6 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="100dp"
     app:cardUseCompatPadding="true"
+    android:backgroundTint="#D6EAF8"
+
     android:padding="15dp"
     app:cardCornerRadius="10dp">
 
@@ -34,8 +36,8 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/ImageStyle_Corners_Rounded"
-            android:layout_width="200dp"
-            android:layout_height="200dp"/>
+            android:layout_width="280dp"
+            android:layout_height="280dp"/>
 
         <!-- Fecha y hora del mensaje -->
         <TextView
