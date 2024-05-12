@@ -1,5 +1,6 @@
 package medina.jesus.app_compra_y_venta.Adaptadores
 
+import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.Modelo.ImagenSlider
@@ -50,7 +53,37 @@ class AdaptadorImagenSlider : RecyclerView.Adapter<AdaptadorImagenSlider.HolderI
             println(e.message)
         }
 
-        holder.itemView.setOnClickListener {  }
+        holder.itemView.setOnClickListener {
+            visualizarImagen(modeloImagenSlider.imagenUrl)
+        }
+    }
+
+    private fun visualizarImagen(imagen : String)
+    {
+        val Pv : PhotoView
+        val Btn_cerrar : MaterialButton
+
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.cuadro_dialogo_visualizar_imagen)
+
+        Pv = dialog.findViewById(R.id.Pv_Imagen)
+        Btn_cerrar = dialog.findViewById(R.id.Btn_Cerrar_Visualizar)
+
+        try{
+            Glide.with(context)
+                .load(imagen)
+                .placeholder(R.drawable.imagen_chat)
+                .into(Pv)
+        }catch (e : Exception){
+            println(e.message)
+        }
+
+        Btn_cerrar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
     }
 
     inner class HolderImagenSlider(itemView : View) : RecyclerView.ViewHolder(itemView){
