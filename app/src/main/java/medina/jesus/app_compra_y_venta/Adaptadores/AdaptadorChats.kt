@@ -122,9 +122,13 @@ class AdaptadorChats : RecyclerView.Adapter<AdaptadorChats.HolderChats>, Filtera
         ref.child(uidRecibido)
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val nombres = "${snapshot.child("nombres").value}"
+                    var nombres = "${snapshot.child("nombres").value}"
                     val imagen = "${snapshot.child("urlImagenPerfil").value}"
 
+                    if(nombres == "null")
+                    {
+                        nombres = "Cuenta eliminada"
+                    }
                     modeloChats.nombre = nombres
                     modeloChats.urlImagenPerfil = imagen
 

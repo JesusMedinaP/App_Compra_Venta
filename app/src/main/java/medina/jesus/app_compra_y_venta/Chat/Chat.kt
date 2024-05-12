@@ -145,10 +145,14 @@ class Chat : AppCompatActivity() {
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     try {
-                        val nombre = "${snapshot.child("nombres").value}"
+                        var nombre = "${snapshot.child("nombres").value}"
                         val imagen = "${snapshot.child("urlImagenPerfil").value}"
                         tokenRecibido = "${snapshot.child("fcmToken").value}"
 
+                        if(nombre == "null")
+                        {
+                            nombre = "Cuenta eliminada"
+                        }
                         binding.TxtNombreVendedorChat.text = nombre
                         try {
                             Glide.with(applicationContext)
