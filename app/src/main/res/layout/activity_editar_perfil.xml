@@ -73,31 +73,48 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Fecha de Nacimiento -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TIL_Nac"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/LL_Calendario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/TIL_Nombres"
-            android:layout_marginTop="10dp"
-            app:boxCornerRadiusTopStart="8dp"
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp">
+            android:layout_below="@id/TIL_Nombres"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
-            <EditText
-                android:id="@+id/Et_Fecha_Nacimiento"
-                android:hint="@string/Et_Fecha_Nacimiento"
+            <ImageView
+                android:id="@+id/Iv_Abrir_Calendario"
+                android:layout_gravity="center"
+                android:src="@drawable/calendario"
+                android:layout_marginEnd="7dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <!-- Fecha de Nacimiento -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TIL_Nac"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/TIL_Nombres"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/Et_Fecha_Nacimiento"
+                    android:hint="@string/Et_Fecha_Nacimiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <!-- Código + Teléfono -->
         <RelativeLayout
             android:id="@+id/RL_Cod_Tel"
             android:layout_marginTop="10dp"
-            android:layout_below="@id/TIL_Nac"
+            android:layout_below="@id/LL_Calendario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -107,14 +124,14 @@
                 app:ccp_autoDetectCountry="true"
                 app:ccp_rememberLastSelection="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"/>
 
             <!-- Número de Teléfono -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/selectorCod"
-                android:layout_marginTop="10dp"
                 app:boxCornerRadiusTopStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"

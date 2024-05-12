@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginEnd="100dp"
     app:cardUseCompatPadding="true"
-    android:backgroundTint="#DAF2B1"
+    android:backgroundTint="#E2EEC8"
     android:padding="15dp"
     app:cardCornerRadius="10dp">
 

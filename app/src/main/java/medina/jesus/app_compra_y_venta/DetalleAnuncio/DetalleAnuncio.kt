@@ -75,7 +75,7 @@ class DetalleAnuncio : AppCompatActivity() {
 
         binding.IbEliminar.setOnClickListener {
             val alertDialog = MaterialAlertDialogBuilder(this)
-            alertDialog.setTitle("Eliminar Anuncio")
+            alertDialog.setTitle("Eliminar anuncio")
                 .setMessage("¿Estás seguro de eliminar este anuncio?")
                 .setPositiveButton("Eliminar"){ dialog, which ->
                     eliminarAnuncio()

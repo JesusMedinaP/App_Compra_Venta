@@ -192,11 +192,22 @@
             android:layout_height="@dimen/m_button_height"
             android:layout_centerInParent="true"/>
 
+        <!-- Eliminar todos mis anuncios -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_Eliminar_Anuncios"
+            android:text="@string/Btn_Eliminar_Anuncios"
+            android:layout_below="@+id/Btn_Verificar_Cuenta"
+            app:icon="@drawable/ic_eliminar_anuncios"
+            android:layout_centerInParent="true"
+            android:textAllCaps="true"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"/>
+
         <!--Cerrar Sesión-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_Cerrar_Sesion"
             android:text="@string/Btn_Cerrar_Sesion"
-            android:layout_below="@id/Btn_Verificar_Cuenta"
+            android:layout_below="@id/Btn_Eliminar_Anuncios"
             android:textAllCaps="true"
             app:icon="@drawable/ic_cerrar_sesion"
             android:layout_width="220dp"

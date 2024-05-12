@@ -1,6 +1,7 @@
 package medina.jesus.app_compra_y_venta
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
@@ -19,6 +20,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.databinding.ActivityEditarPerfilBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class EditarPerfil : AppCompatActivity() {
 
@@ -44,9 +48,30 @@ class EditarPerfil : AppCompatActivity() {
             validarInfo()
         }
 
+        binding.IvAbrirCalendario.setOnClickListener {
+            establecerFecha()
+        }
+
         binding.FABCambiarImg.setOnClickListener {
             select_imagen_de()
         }
+    }
+
+    private fun establecerFecha()
+    {
+        val miCalendario = Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener{datePicker, anio, mes, dia ->
+            miCalendario.set(Calendar.YEAR, anio)
+            miCalendario.set(Calendar.MONTH, mes)
+            miCalendario.set(Calendar.DAY_OF_MONTH, dia)
+
+            val formato = "dd/MM/yyyy"
+            val sdf = SimpleDateFormat(formato, Locale.ENGLISH)
+            binding.EtFechaNacimiento.setText(sdf.format(miCalendario.time))
+        }
+
+        DatePickerDialog(this, datePicker, miCalendario.get(Calendar.YEAR),
+            miCalendario.get(Calendar.MONTH), miCalendario.get(Calendar.DAY_OF_MONTH)).show()
     }
 
     private var nombres = ""

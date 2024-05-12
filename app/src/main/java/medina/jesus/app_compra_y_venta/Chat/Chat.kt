@@ -151,8 +151,7 @@ class Chat : AppCompatActivity() {
 
                         binding.TxtNombreVendedorChat.text = nombre
                         try {
-
-                            Glide.with(this@Chat)
+                            Glide.with(applicationContext)
                                 .load(imagen)
                                 .placeholder(R.drawable.img_perfil)
                                 .into(binding.ToolbarIv)

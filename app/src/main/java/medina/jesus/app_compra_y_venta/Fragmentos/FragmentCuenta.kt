@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.CambiarPassword
 import medina.jesus.app_compra_y_venta.Constantes
@@ -72,6 +74,37 @@ class FragmentCuenta : Fragment() {
         binding.BtnVerificarCuenta.setOnClickListener {
             verificarCuenta()
         }
+
+        binding.BtnEliminarAnuncios.setOnClickListener {
+            val alertDialog = MaterialAlertDialogBuilder(contexto)
+            alertDialog.setTitle("Eliminar todos mis anuncios")
+                .setMessage("¿Estás seguro de eliminar todos tus anuncios?")
+                .setPositiveButton("Eliminar"){dialog, which->
+                    eliminarMisAnuncios()
+                }
+                .setNegativeButton("Cancelar"){dialog, which->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
+
+    private fun eliminarMisAnuncios() {
+        val uidUsuario = firebaseAuth.uid
+        val ref = Constantes.obtenerReferenciaAnunciosDB().orderByChild("uid").equalTo(uidUsuario)
+        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(ds in snapshot.children){
+                    ds.ref.removeValue()
+                }
+                Constantes.toastConMensaje(contexto, "Se han eliminado todos sus anuncios")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println(error.message)
+                Constantes.toastConMensaje(contexto,"Ha habido un error al borrar tus anuncios")
+            }
+        })
     }
 
     private fun leerInfo() {

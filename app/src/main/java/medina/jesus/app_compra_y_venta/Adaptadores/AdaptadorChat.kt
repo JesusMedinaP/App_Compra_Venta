@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import medina.jesus.app_compra_y_venta.Constantes
@@ -69,16 +70,15 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
 
             if(modeloChat.emisorUid.equals(firebaseAuth.uid)){
                 holder.itemView.setOnClickListener {
-                    val opciones = arrayOf<CharSequence>("Eliminar Mensaje", "Cancelar")
-                    val builder : AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
-                    builder
-                    builder.setTitle("¿Qué desea realizar?")
-                    builder.setItems(opciones, DialogInterface.OnClickListener { dialogInterface, i ->
-                        if(i == 0){
+                    val alertDialog = MaterialAlertDialogBuilder(holder.itemView.context)
+                    alertDialog.setTitle("Eliminar mensaje")
+                        .setMessage("¿Estás seguro de eliminar este mensaje?")
+                        .setPositiveButton("Eliminar mensaje"){ dialog, which ->
                             eliminarMensaje(position, holder, modeloChat)
                         }
-                    })
-                    builder.show()
+                        .setNegativeButton("Cancelar"){ dialog, which ->
+                            dialog.dismiss()
+                        }.show()
                 }
             }
         }else{
