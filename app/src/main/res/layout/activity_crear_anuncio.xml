@@ -23,6 +23,7 @@
     </RelativeLayout>
     
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/NSC_Formulario"
         android:layout_below="@+id/RL_Imagen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
 
                 <EditText
                     android:id="@+id/Et_Marca"
-                    android:text="@string/Et_Marca"
+                    android:hint="@string/Et_Marca"
                     android:inputType="textPersonName|textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -200,6 +201,7 @@
         android:layout_alignParentBottom="true"
         android:textAllCaps="true"
         android:layout_margin="10dp"
+        android:layout_below="@id/NSC_Formulario"
         app:cornerRadius="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
