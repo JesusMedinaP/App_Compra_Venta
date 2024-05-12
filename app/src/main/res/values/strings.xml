@@ -144,4 +144,5 @@
     <string name="Txt_Nombre_Vendedor_Chat">Nombre del vendedor</string>
     <string name="Et_Mensaje_Chat">Escriba algo</string>
     <string name="Tv_Tiempo_Mensaje">dd/MM/yyyy hh:mm</string>
+    <string name="Btn_Cerrar_Visualizar">Cerrar</string>
 </resources>

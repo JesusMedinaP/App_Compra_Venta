@@ -1,6 +1,7 @@
 package medina.jesus.app_compra_y_venta.Adaptadores
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.auth.FirebaseAuth
 import medina.jesus.app_compra_y_venta.Constantes
@@ -101,7 +104,7 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
                         if(i == 0){
                             eliminarMensaje(position, holder, modeloChat)
                         }else if(i == 1){
-                            //Visualizar imagen
+                            visualizarImagen(modeloChat.mensaje)
                         }
                     })
                     builder.show()
@@ -113,7 +116,7 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
                     builder.setTitle("¿Qué desea realizar?")
                     builder.setItems(opciones, DialogInterface.OnClickListener{dialogIntercae, i ->
                         if(i == 0){
-                            //Visualizar imagen
+                            visualizarImagen(modeloChat.mensaje)
                         }
                     })
                     builder.show()
@@ -134,6 +137,35 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
                 Constantes.toastConMensaje(holder.itemView.context, "No se pudo eliminar el mensaje")
                 println(e.message)
             }
+    }
+
+    private fun visualizarImagen(imagen : String)
+    {
+        val Pv : PhotoView
+        val Btn_cerrar : MaterialButton
+
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.cuadro_dialogo_visualizar_imagen)
+
+        Pv = dialog.findViewById(R.id.Pv_Imagen)
+        Btn_cerrar = dialog.findViewById(R.id.Btn_Cerrar_Visualizar)
+
+        try{
+            Glide.with(context)
+                .load(imagen)
+                .placeholder(R.drawable.imagen_chat)
+                .into(Pv)
+        }catch (e : Exception){
+            Constantes.toastConMensaje(context, "Ha habido un error al cargar la imagen")
+            println(e.message)
+        }
+
+        Btn_cerrar.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
     }
 
     constructor(context: Context, chats: ArrayList<Chat>) {
