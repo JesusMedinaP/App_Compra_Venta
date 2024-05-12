@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import medina.jesus.app_compra_y_venta.Adaptadores.AdaptadorChat
@@ -133,7 +132,7 @@ class Chat : AppCompatActivity() {
                                 .into(binding.ToolbarIv)
 
                         }catch (e : Exception){
-                            println("Error al cargar la imagne con Glide " + e.message)
+                            println("Error al cargar la imagen con Glide " + e.message)
                         }
                     }catch (e : Exception){
                         println("Error al acceder al vendedor " + e.message)

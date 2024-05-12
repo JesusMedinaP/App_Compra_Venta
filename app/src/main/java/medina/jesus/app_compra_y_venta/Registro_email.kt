@@ -107,7 +107,7 @@ class Registro_email : AppCompatActivity() {
         hashMap["proveedor"] = "Email"
         hashMap["escribiendo"] = ""
         hashMap["tiempo"] = tiempo
-        hashMap["online"] = true
+        hashMap["estado"] = "online"
         hashMap["email"] = "${emailUsuario}"
         hashMap["uid"] = "${uidUsuario}"
         hashMap["fecha_nac"] = ""

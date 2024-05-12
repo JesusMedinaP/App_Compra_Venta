@@ -111,7 +111,7 @@ class OpcionesLogin : AppCompatActivity() {
         hashMap["proveedor"] = "Google"
         hashMap["escribiendo"] = ""
         hashMap["tiempo"] = tiempo
-        hashMap["online"] = true
+        hashMap["estado"] = "online"
         hashMap["email"] = "${emailUsuario}"
         hashMap["uid"] = "${uidUsuario}"
         hashMap["fecha_nac"] = ""
