@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import medina.jesus.app_compra_y_venta.Anuncios.CrearAnuncio
 import medina.jesus.app_compra_y_venta.Fragmentos.FragmentChats
 import medina.jesus.app_compra_y_venta.Fragmentos.FragmentCuenta
@@ -71,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         {
             startActivity(Intent(this,OpcionesLogin::class.java))
             finishAffinity()
+        }else{
+            agregarFcmToken()
         }
     }
 
@@ -108,5 +111,29 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransition = supportFragmentManager.beginTransaction()
         fragmentTransition.replace(binding.FragmentL1.id, fragment, "FragmentCuenta")
         fragmentTransition.commit()
+    }
+
+    private fun agregarFcmToken()
+    {
+        val uidUsuario = "${firebaseAuth.uid}"
+        FirebaseMessaging.getInstance().token
+            .addOnSuccessListener { fcmToken ->
+                val hashMap = HashMap<String, Any>()
+                hashMap["fcmToken"] = "$fcmToken"
+                val ref = Constantes.obtenerReferenciaUsuariosDB()
+                ref.child(uidUsuario)
+                    .updateChildren(hashMap)
+                    .addOnSuccessListener {
+                        // Se ha agregado correctamente el el token a Firebase
+                    }
+                    .addOnFailureListener { e->
+                        println(e.message)
+                        Constantes.toastConMensaje(this, "Ha habido un problema al cargar el token del usuario")
+                    }
+            }
+            .addOnFailureListener { e->
+                println(e.message)
+                Constantes.toastConMensaje(this, "Ha habido un problema al generar el token")
+            }
     }
 }
