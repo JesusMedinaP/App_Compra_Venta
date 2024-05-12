@@ -135,7 +135,6 @@ class AdaptadorChats : RecyclerView.Adapter<AdaptadorChats.HolderChats>, Filtera
                             .placeholder(R.drawable.img_perfil)
                             .into(holder.Iv_perfil)
                     }catch(e:Exception){
-                        Constantes.toastConMensaje(context, "Ha habido un problema al cargar la imagen")
                         println(e.message)
                     }
                 }

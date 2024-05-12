@@ -156,7 +156,6 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
                 .placeholder(R.drawable.imagen_chat)
                 .into(Pv)
         }catch (e : Exception){
-            Constantes.toastConMensaje(context, "Ha habido un error al cargar la imagen")
             println(e.message)
         }
 

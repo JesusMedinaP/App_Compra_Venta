@@ -66,6 +66,7 @@ class Chat : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        cargarMiInformacion()
         cargarInfoVendedor()
         cargarMensajes()
 
