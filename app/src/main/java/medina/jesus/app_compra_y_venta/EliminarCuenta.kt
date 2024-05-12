@@ -22,7 +22,6 @@ class EliminarCuenta : AppCompatActivity() {
     private lateinit var progressDialog: AlertDialog
     private lateinit var firebaseAuth: FirebaseAuth
     private var firebaseUser : FirebaseUser?=null
-    private var intentos = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEliminarCuentaBinding.inflate(layoutInflater)
@@ -43,18 +42,6 @@ class EliminarCuenta : AppCompatActivity() {
     }
 
     private fun eliminarCuenta() {
-        if(intentos == 0)
-        {
-            val alertDialog = MaterialAlertDialogBuilder(this)
-            alertDialog.setTitle("Aviso eliminar cuenta")
-                .setMessage("Para poder eliminar tu cuenta permanentemente debes cerrar e " +
-                        "iniciar sesión como modo de confirmación para esta operación. Después " +
-                        "podrás eliminar la cuenta.")
-                .setNeutralButton("Aceptar"){ dialog, which ->
-                    dialog.dismiss()
-                }.show()
-            intentos++
-        }else {
             progressDialog = SpotsDialog.Builder()
                 .setContext(this)
                 .setMessage("Eliminando su cuenta")
@@ -103,10 +90,16 @@ class EliminarCuenta : AppCompatActivity() {
                 }
                 .addOnFailureListener { e ->
                     progressDialog.dismiss()
-                    Constantes.toastConMensaje(this, "Ha habido un problema al eliminar la cuenta")
+                    val alertDialog = MaterialAlertDialogBuilder(this)
+                    alertDialog.setTitle("Aviso eliminar cuenta")
+                        .setMessage("Para poder eliminar tu cuenta permanentemente debes cerrar e " +
+                                "iniciar sesión como modo de confirmación para esta operación. Después " +
+                                "podrás eliminar la cuenta.")
+                        .setNeutralButton("Aceptar"){ dialog, which ->
+                            dialog.dismiss()
+                        }.show()
                     println(e.message)
                 }
-        }
     }
 
     private fun irMainActivity()
