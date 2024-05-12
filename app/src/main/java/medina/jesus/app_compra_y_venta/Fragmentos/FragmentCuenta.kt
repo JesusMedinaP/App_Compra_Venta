@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener
 import medina.jesus.app_compra_y_venta.CambiarPassword
 import medina.jesus.app_compra_y_venta.Constantes
 import medina.jesus.app_compra_y_venta.EditarPerfil
+import medina.jesus.app_compra_y_venta.EliminarCuenta
 import medina.jesus.app_compra_y_venta.OpcionesLogin
 import medina.jesus.app_compra_y_venta.R
 import medina.jesus.app_compra_y_venta.databinding.FragmentCuentaBinding
@@ -86,6 +87,10 @@ class FragmentCuenta : Fragment() {
                     dialog.dismiss()
                 }
                 .show()
+        }
+
+        binding.BtnEliminarCuenta.setOnClickListener {
+            startActivity(Intent(contexto, EliminarCuenta::class.java))
         }
     }
 

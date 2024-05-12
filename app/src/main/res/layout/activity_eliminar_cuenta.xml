@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EliminarCuenta">
+
+    <RelativeLayout
+        android:id="@+id/ToolbarRl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/m_toolbar_height">
+
+        <ImageButton
+            android:id="@+id/Ib_Regresar"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_regresar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="@string/Txt_Eliminar_Cuenta"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_alignParentBottom="true"
+            android:background="#ccc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:text="@string/Txt_Mensaje_Eliminar"
+        android:layout_below="@id/ToolbarRl"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        app:cornerRadius="8dp"
+        android:layout_alignParentBottom="true"
+        android:textAllCaps="true"
+        android:backgroundTint="#FF0000"
+        app:icon="@drawable/ic_eliminar_cuenta"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/Btn_Eliminar_Mi_Cuenta"
+        android:text="@string/Btn_Eliminar_Mi_Cuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

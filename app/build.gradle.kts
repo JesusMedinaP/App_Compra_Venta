@@ -65,4 +65,5 @@ dependencies {
     implementation ("com.hbb20:ccp:2.7.0")
     implementation ("com.github.chrisbanes:PhotoView:2.3.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.github.d-max:spots-dialog:1.1@aar")
 }

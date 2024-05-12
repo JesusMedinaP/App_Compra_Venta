@@ -203,6 +203,17 @@
             android:layout_width="220dp"
             android:layout_height="wrap_content"/>
 
+        <!-- Eliminar cuenta -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Btn_Eliminar_Cuenta"
+            android:text="@string/Btn_Eliminar_Cuenta"
+            android:layout_below="@+id/Btn_Cerrar_Sesion"
+            app:icon="@drawable/ic_eliminar_cuenta"
+            android:layout_centerInParent="true"
+            android:textAllCaps="true"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"/>
+
         <!--Cerrar Sesión-->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/Btn_Cerrar_Sesion"

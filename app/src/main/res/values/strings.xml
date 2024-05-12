@@ -47,6 +47,7 @@
     <string name="Btn_Cambiar_Passsword">Cambiar contraseña</string>
     <string name="Btn_Verificar_Cuenta">Verificar cuenta</string>
     <string name="Btn_Eliminar_Anuncios">Eliminar mis anuncios</string>
+    <string name="Btn_Eliminar_Cuenta">Eliminar cuenta</string>
 
     <!--Editar Perfil-->
     <string name="Txt_Editar_Perfil">Editar Perfil</string>
@@ -148,4 +149,9 @@
     <string name="Et_Mensaje_Chat">Escriba algo</string>
     <string name="Tv_Tiempo_Mensaje">dd/MM/yyyy hh:mm</string>
     <string name="Btn_Cerrar_Visualizar">Cerrar</string>
+
+    <!-- Eliminar Cuenta -->
+    <string name="Txt_Eliminar_Cuenta">Eliminar Cuenta</string>
+    <string name="Txt_Mensaje_Eliminar">¿Estás seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer</string>
+    <string name="Btn_Eliminar_Mi_Cuenta">Eliminar mi cuenta</string>
 </resources>
