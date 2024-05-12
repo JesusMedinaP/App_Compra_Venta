@@ -1,6 +1,8 @@
 package medina.jesus.app_compra_y_venta.Adaptadores
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,7 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
     private val context : Context
     private val chats : ArrayList<Chat>
     private val firebaseAuth : FirebaseAuth
+    private var rutaChat = ""
 
     companion object{
         private const val MENSAJE_IZQUIERDO = 0
@@ -60,6 +63,21 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
             holder.Tv_mensaje.visibility = View.VISIBLE
             holder.Iv_mensaje.visibility = View.GONE
             holder.Tv_mensaje.text = mensaje
+
+            if(modeloChat.emisorUid.equals(firebaseAuth.uid)){
+                holder.itemView.setOnClickListener {
+                    val opciones = arrayOf<CharSequence>("Eliminar Mensaje", "Cancelar")
+                    val builder : AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context)
+                    builder
+                    builder.setTitle("¿Qué desea realizar?")
+                    builder.setItems(opciones, DialogInterface.OnClickListener { dialogInterface, i ->
+                        if(i == 0){
+                            eliminarMensaje(position, holder, modeloChat)
+                        }
+                    })
+                    builder.show()
+                }
+            }
         }else{
             holder.Tv_mensaje.visibility = View.GONE
             holder.Iv_mensaje.visibility = View.VISIBLE
@@ -71,9 +89,23 @@ class AdaptadorChat : RecyclerView.Adapter<AdaptadorChat.HolderChat>{
                     .error(R.drawable.imagen_chat_falla)
                     .into(holder.Iv_mensaje)
             }catch (e : Exception){
-
+                println(e.message)
             }
         }
+    }
+
+    private fun eliminarMensaje(position: Int, holder: HolderChat, modeloChat: Chat) {
+        rutaChat = Constantes.rutaChat(modeloChat.receptorUid, modeloChat.emisorUid)
+        val ref = Constantes.obtenerReferenciaChatsDB()
+        ref.child(rutaChat).child(chats.get(position).idMensaje)
+            .removeValue()
+            .addOnSuccessListener {
+                Constantes.toastConMensaje(holder.itemView.context, "Mensaje eliminado")
+            }
+            .addOnFailureListener { e->
+                Constantes.toastConMensaje(holder.itemView.context, "No se pudo eliminar el mensaje")
+                println(e.message)
+            }
     }
 
     constructor(context: Context, chats: ArrayList<Chat>) {
