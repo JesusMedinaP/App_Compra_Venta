@@ -98,7 +98,7 @@ class FragmentInicio : Fragment() {
             val consulta = binding.EtBuscar.text.toString().trim()
             if(consulta.isNotEmpty()){
                 binding.EtBuscar.setText("")
-                Constantes.toastConMensaje(contexto, "Se ha limpiado la busqueda")
+                Constantes.toastConMensaje(contexto, "Se ha limpiado la búsqueda")
             }else{
                 Constantes.toastConMensaje(contexto, "No se ha ingresado una consulta")
             }
