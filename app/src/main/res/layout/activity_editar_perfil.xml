@@ -46,7 +46,7 @@
                 app:fabSize="mini"
                 app:tint="@android:color/white"
                 android:backgroundTint="@color/color_personalizado"
-                android:src="@drawable/ic_select_imagen"
+                android:src="@drawable/ic_agregar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

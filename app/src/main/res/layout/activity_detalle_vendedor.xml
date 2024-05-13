@@ -43,23 +43,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        app:contentPadding="10dp">
+        app:contentPadding="15dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/Iv_Vendedor"
                 android:src="@drawable/img_perfil"
                 android:layout_marginEnd="10dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
 
             <TextView
                 android:id="@+id/Tv_Nombres"
                 android:text="@string/Tv_Nombres"
                 android:layout_toEndOf="@id/Iv_Vendedor"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -68,6 +69,7 @@
                 android:text="@string/Txt_Miembro"
                 android:layout_toEndOf="@id/Iv_Vendedor"
                 android:layout_below="@id/Tv_Nombres"
+                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -76,6 +78,7 @@
                 android:text="@string/Tv_Miembro"
                 android:layout_toEndOf="@id/Txt_Miembro"
                 android:layout_marginStart="10dp"
+                android:textSize="16sp"
                 android:layout_below="@id/Tv_Nombres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
