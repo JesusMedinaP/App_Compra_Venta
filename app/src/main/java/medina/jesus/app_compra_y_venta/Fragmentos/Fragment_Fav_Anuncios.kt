@@ -103,13 +103,13 @@ class Fragment_Fav_Anuncios : Fragment() {
                     Handler().postDelayed({
                         anunciosAdaptador = AdaptadorAnuncio(contexto, anuncios)
                         binding.anunciosRV.adapter = anunciosAdaptador
-                    }, 500)
 
-                    if(anuncios.isEmpty()){
-                        binding.TvFeedbackMisFavoritos.visibility = View.VISIBLE
-                    }else{
-                        binding.TvFeedbackMisFavoritos.visibility = View.GONE
-                    }
+                        if(anuncios.isEmpty()){
+                            binding.TvFeedbackMisFavoritos.visibility = View.VISIBLE
+                        }else{
+                            binding.TvFeedbackMisFavoritos.visibility = View.GONE
+                        }
+                    }, 500)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
