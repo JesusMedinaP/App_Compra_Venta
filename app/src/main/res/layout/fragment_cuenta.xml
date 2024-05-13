@@ -37,6 +37,7 @@
             android:layout_below="@id/Iv_Perfil"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
+            android:textSize="17sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -201,7 +202,7 @@
             android:layout_centerInParent="true"
             android:textAllCaps="true"
             android:layout_width="220dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="@dimen/m_button_height"/>
 
         <!-- Eliminar cuenta -->
         <com.google.android.material.button.MaterialButton
@@ -212,7 +213,7 @@
             android:layout_centerInParent="true"
             android:textAllCaps="true"
             android:layout_width="220dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="@dimen/m_button_height"/>
 
         <!--Cerrar Sesión-->
         <com.google.android.material.button.MaterialButton
@@ -224,7 +225,5 @@
             android:layout_width="220dp"
             android:layout_height="@dimen/m_button_height"
             android:layout_centerInParent="true"/>
-
-
     </RelativeLayout>
 </ScrollView>
