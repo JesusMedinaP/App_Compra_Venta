@@ -157,4 +157,5 @@
     <string name="Txt_Eliminar_Cuenta">Eliminar Cuenta</string>
     <string name="Txt_Mensaje_Eliminar">¿Estás seguro que deseas eliminar tu cuenta? Esta acción no se puede deshacer</string>
     <string name="Btn_Eliminar_Mi_Cuenta">Eliminar mi cuenta</string>
+    <string name="Tv_Feedback_Chats">No tienes conversaciones con otros usuarios</string>
 </resources>

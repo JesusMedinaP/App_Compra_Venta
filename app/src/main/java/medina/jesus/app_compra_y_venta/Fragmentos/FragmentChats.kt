@@ -81,6 +81,12 @@ class FragmentChats : Fragment() {
 
                 adaptadorChats = AdaptadorChats(contexto, chats)
                 binding.RvChats.adapter = adaptadorChats
+
+                if(chats.isEmpty()){
+                    binding.TvFeedback.visibility = View.VISIBLE
+                }else{
+                    binding.TvFeedback.visibility = View.GONE
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

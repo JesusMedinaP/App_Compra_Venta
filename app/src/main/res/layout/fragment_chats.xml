@@ -25,6 +25,19 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Texto para dar feedback-->
+    <TextView
+        android:id="@+id/Tv_Feedback"
+        android:text="@string/Tv_Feedback_Chats"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Rv_Chats"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
