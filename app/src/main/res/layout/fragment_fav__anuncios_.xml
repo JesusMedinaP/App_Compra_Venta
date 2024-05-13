@@ -42,9 +42,21 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <TextView
+        android:id="@+id/Tv_Feedback_Mis_Favoritos"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/LLBuscar"
+        android:visibility="gone"
+        android:text="@string/Tv_Feedback_Mis_Favoritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/anunciosRV"
-        android:layout_below="@id/LLBuscar"
+        android:layout_below="@id/Tv_Feedback_Mis_Favoritos"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_anuncio"
         android:layout_width="match_parent"

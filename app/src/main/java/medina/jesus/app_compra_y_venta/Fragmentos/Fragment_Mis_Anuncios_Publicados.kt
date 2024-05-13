@@ -93,6 +93,12 @@ class Fragment_Mis_Anuncios_Publicados : Fragment() {
                     }
                     anunciosAdaptador = AdaptadorAnuncio(contexto, misAnuncios)
                     binding.misAnunciosRV.adapter = anunciosAdaptador
+
+                    if(misAnuncios.isEmpty()){
+                        binding.TvFeedbackMisAnuncios.visibility = View.VISIBLE
+                    }else{
+                        binding.TvFeedbackMisAnuncios.visibility = View.GONE
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {

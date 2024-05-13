@@ -104,6 +104,12 @@ class Fragment_Fav_Anuncios : Fragment() {
                         anunciosAdaptador = AdaptadorAnuncio(contexto, anuncios)
                         binding.anunciosRV.adapter = anunciosAdaptador
                     }, 500)
+
+                    if(anuncios.isEmpty()){
+                        binding.TvFeedbackMisFavoritos.visibility = View.VISIBLE
+                    }else{
+                        binding.TvFeedbackMisFavoritos.visibility = View.GONE
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
