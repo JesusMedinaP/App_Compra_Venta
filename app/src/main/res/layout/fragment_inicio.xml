@@ -83,7 +83,6 @@
         android:layout_height="wrap_content"/>
 
     <!-- Texto para dar feedback-->
-
     <TextView
         android:id="@+id/Tv_Feedback"
         android:text="@string/Tv_Feedback"
