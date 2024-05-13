@@ -189,6 +189,12 @@ class FragmentInicio : Fragment() {
                 }
                 adaptadorAnuncio = AdaptadorAnuncio(contexto, anuncios)
                 binding.RvAnuncios.adapter = adaptadorAnuncio
+
+                if(anuncios.isEmpty()){
+                    binding.TvFeedback.visibility = View.VISIBLE
+                }else{
+                    binding.TvFeedback.visibility = View.GONE
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

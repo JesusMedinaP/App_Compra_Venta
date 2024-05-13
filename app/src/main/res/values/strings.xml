@@ -77,6 +77,7 @@
     <string name="Et_buscar">Buscar</string>
     <string name="Txt_Categoria">Categorías</string>
     <string name="Tv_Categoria">Categoría</string>
+    <string name="Tv_Feedback">No hay anuncios cerca de la ubicación especificada</string>
 
     <!-- Item Anuncio -->
     <string name="Tv_Titulo">Nombre del producto</string>
