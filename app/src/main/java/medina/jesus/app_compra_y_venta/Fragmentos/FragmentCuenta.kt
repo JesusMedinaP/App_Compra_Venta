@@ -63,9 +63,10 @@ class FragmentCuenta : Fragment() {
 
         //Método para poder cerrar sesión y volver a la vista de login.
         binding.BtnCerrarSesion.setOnClickListener {
-            startActivity(Intent(contexto, OpcionesLogin::class.java))
-            activity?.finishAffinity()
             firebaseAuth.signOut()
+            activity?.finishAffinity()
+            startActivity(Intent(contexto, OpcionesLogin::class.java))
+
         }
 
         binding.BtnCambiarPasssword.setOnClickListener {

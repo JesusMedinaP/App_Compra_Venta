@@ -102,8 +102,11 @@ class AdaptadorComentario: RecyclerView.Adapter<AdaptadorComentario.HolderComent
                     val nombres = "${snapshot.child("nombres").value}"
                     val imagen = "${snapshot.child("urlImagenPerfil").value}"
 
-                    holder.Tv_nombre.text = nombres
-
+                    if(nombres == "null"){
+                        holder.Tv_nombre.text = "Cuenta eliminada"
+                    }else{
+                        holder.Tv_nombre.text = nombres
+                    }
                     try {
                         Glide.with(context)
                             .load(imagen)
