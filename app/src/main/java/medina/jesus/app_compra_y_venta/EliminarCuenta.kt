@@ -2,11 +2,9 @@ package medina.jesus.app_compra_y_venta
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -50,74 +48,60 @@ class EliminarCuenta : AppCompatActivity() {
                 .apply { show() }
 
             val uidUsuario = firebaseAuth.uid
-            firebaseUser!!.delete()
-                .addOnSuccessListener {
-                    val anuncios = Constantes.obtenerReferenciaAnunciosDB()
-                    anuncios.orderByChild("uid").equalTo(uidUsuario)
-                        .addValueEventListener(object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                for (ds in snapshot.children) {
-                                    ds.ref.removeValue()
+
+            val anuncios = Constantes.obtenerReferenciaAnunciosDB()
+            anuncios.orderByChild("uid").equalTo(uidUsuario)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (ds in snapshot.children) {
+                        ds.ref.removeValue()
+                    }
+                    Constantes.obtenerReferenciaComentariosDB().child(uidUsuario!!)
+                        .removeValue()
+                        .addOnSuccessListener {
+                            Constantes.obtenerReferenciaUsuariosDB().child(uidUsuario)
+                                .removeValue()
+                                .addOnSuccessListener {
+                                    progressDialog.dismiss()
+                                    firebaseUser!!.delete()
+                                    irOpcionesLogin()
                                 }
-                                Constantes.obtenerReferenciaComentariosDB().child(uidUsuario!!)
-                                    .removeValue()
-                                    .addOnSuccessListener {
-                                        Constantes.obtenerReferenciaUsuariosDB().child(uidUsuario!!)
-                                            .removeValue()
-                                            .addOnSuccessListener {
-                                                progressDialog.dismiss()
-                                                irMainActivity()
-                                            }
-                                            .addOnFailureListener { e ->
-                                                progressDialog.dismiss()
-                                                Constantes.toastConMensaje(
-                                                    this@EliminarCuenta,
-                                                    "Ha habido un problema al eliminar el usuario"
-                                                )
-                                                println(e.message)
-                                                irMainActivity()
-                                            }
-                                    }
-                                    .addOnFailureListener { e->
-                                        progressDialog.dismiss()
-                                        println(e.message)
-                                        irMainActivity()
-                                    }
-
-                            }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                progressDialog.dismiss()
-                                println(error.message)
-                                Constantes.toastConMensaje(
-                                    this@EliminarCuenta,
-                                    "Ha habido un problema al eliminar sus anuncios"
-                                )
-                            }
-                        })
+                                .addOnFailureListener { e ->
+                                    progressDialog.dismiss()
+                                    Constantes.toastConMensaje(
+                                        this@EliminarCuenta,
+                                        "Ha habido un problema al eliminar el usuario"
+                                    )
+                                    println(e.message)
+                                    irOpcionesLogin()
+                                }
+                        }
+                        .addOnFailureListener { e->
+                            progressDialog.dismiss()
+                            println(e.message)
+                            irOpcionesLogin()
+                        }
                 }
-                .addOnFailureListener { e ->
+
+                override fun onCancelled(error: DatabaseError) {
                     progressDialog.dismiss()
-                    val alertDialog = MaterialAlertDialogBuilder(this)
-                    alertDialog.setTitle("Aviso eliminar cuenta")
-                        .setMessage("Para poder eliminar tu cuenta permanentemente debes cerrar e " +
-                                "iniciar sesión como modo de confirmación para esta operación. Después " +
-                                "podrás eliminar la cuenta.")
-                        .setNeutralButton("Aceptar"){ dialog, which ->
-                            dialog.dismiss()
-                        }.show()
-                    println(e.message)
+                    println(error.message)
+                    Constantes.toastConMensaje(
+                        this@EliminarCuenta,
+                        "Ha habido un problema al eliminar sus anuncios"
+                    )
                 }
+            })
     }
 
-    private fun irMainActivity()
+    private fun irOpcionesLogin()
     {
-        startActivity(Intent(this, MainActivity::class.java))
         finishAffinity()
+        startActivity(Intent(this, OpcionesLogin::class.java))
     }
 
     @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-        irMainActivity()
+        irOpcionesLogin()
     }
 }
