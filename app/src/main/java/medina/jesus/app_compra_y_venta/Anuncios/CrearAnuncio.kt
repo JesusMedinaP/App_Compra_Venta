@@ -221,10 +221,12 @@ class CrearAnuncio : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 cargarImagenesStorage(idAnuncioEditado)
+                Constantes.toastConMensaje(this, "El anuncio se ha actualizado correctamente")
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
-                Constantes.toastConMensaje(this, "${e.message}")
+                Constantes.toastConMensaje(this, "Ha habido un problema al actualizar el anuncio")
+                println(e.message)
             }
     }
 

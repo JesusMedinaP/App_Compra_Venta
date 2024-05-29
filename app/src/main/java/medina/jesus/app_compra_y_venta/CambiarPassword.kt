@@ -93,8 +93,8 @@ class CambiarPassword : AppCompatActivity() {
                 Constantes.toastConMensaje(this, "Su contraseña ha sido actualizada")
 
                 firebaseAuth.signOut()
-                startActivity(Intent(this, Login_email::class.java))
                 finishAffinity()
+                startActivity(Intent(this, Login_email::class.java))
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
